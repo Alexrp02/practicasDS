@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p2/componentes/header.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,19 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme(
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            error: Colors.red,
-            surface: Colors.orange,
-            brightness: Brightness.dark,
-            secondary: Colors.white,
-            onSecondary: Colors.white,
-            onError: Colors.black,
-            background: Colors.white12,
-            onBackground: Colors.white,
-            onSurface: Colors.orangeAccent
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -74,15 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
+      appBar: const Header(),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
