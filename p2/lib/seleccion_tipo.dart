@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:p2/componentes/button.dart';
 import 'package:p2/componentes/header.dart';
+import 'package:p2/componentes/incrementar_button.dart';
 
 class SeleccionTipo extends StatefulWidget {
   const SeleccionTipo({super.key});
@@ -18,6 +19,7 @@ class _SeleccionTipoState extends State<SeleccionTipo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const Header(),
       body: Center(
         child: Column(
