@@ -1,11 +1,11 @@
- import 'package:p2/modelo/CasaBuilder.dart';
+import 'package:p2/modelo/CasaBuilder.dart';
 
 
 import 'SalaDeEstar.dart';
 
-class ApartamentoBuilder extends CasaBuilder{
+class ApartamentoBuilder extends CasaBuilder {
+  ApartamentoBuilder() {}
 
-  ApartamentoBuilder(){}
 
   void setCocina(){
     cocina.tipo = "Apartamento";
@@ -27,3 +27,4 @@ class ApartamentoBuilder extends CasaBuilder{
   }
 
 }
+
