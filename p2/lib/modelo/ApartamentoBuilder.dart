@@ -1,31 +1,29 @@
  import 'package:p2/modelo/CasaBuilder.dart';
 
-import 'Banio.dart';
-import 'Cocina.dart';
-import 'Dormitorio.dart';
+
 import 'SalaDeEstar.dart';
 
 class ApartamentoBuilder extends CasaBuilder{
 
   ApartamentoBuilder(){}
 
-  void setCocina(Cocina c){
-    c.tipo = "Apartamento";
-    casa.cocina = c;
+  void setCocina(){
+    cocina.tipo = "Apartamento";
+    casa.cocina = cocina;
   }
 
-  void setBanio(Banio b){
-    b.tipo = "Apartamento";
-    casa.banio = b;
+  void setBanio(){
+    cocina.tipo = "Apartamento";
+    casa.banio = banio;
   }
 
-  void setSalaDeEstar(SalaDeEstar s){
-    s.salaDeEstar += " De Apartamento";
-    casa.salaDeEstar = s;
+  void setSalaDeEstar(){
+    SalaDeEstar salaChalet = SalaDeEstar("Sala de Estar de Apartamento");
+    casa.salaDeEstar = salaChalet;
   }
 
-  void addDormitorio(Dormitorio d){
-    d.dormitorio += " De Apartamento";
-    casa.addDormitorio(d);
+  void setDormitorios(){
+    casa.dormitorios = dormitorios;
   }
+
 }

@@ -4,21 +4,25 @@ import 'package:p2/modelo/Dormitorio.dart';
 import 'Banio.dart';
 import 'Casa.dart';
 import 'Cocina.dart';
-import 'SalaDeEstar.dart';
+
 
 abstract class CasaBuilder{
   late Casa casa;
+  late Banio banio;
+  late Cocina cocina;
+  late List<Dormitorio>dormitorios;
+
 
   void crearCasa(){
     casa = Casa.vacia();
   }
 
-  void setCocina(Cocina c){}
+  void setCocina(){}
 
-  void setBanio(Banio b){}
+  void setBanio(){}
 
-  void setSalaDeEstar(SalaDeEstar s){}
+  void setSalaDeEstar(){}
 
-  void addDormitorio(Dormitorio d){}
+  void setDormitorios(){}
 
 }
