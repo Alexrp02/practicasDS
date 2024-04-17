@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
       required this.text,
       required this.image});
 
-  final VoidCallback onPressed;
+  final Function(String) onPressed;
   final String text;
   final String image;
 
@@ -21,7 +21,7 @@ class CustomButton extends StatelessWidget {
       color: const Color(0xffd9d9d9),
       child: InkWell(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
-        onTap: onPressed,
+        onTap: () => onPressed(text),
         child: SizedBox(
           width: 200,
           height: 200,

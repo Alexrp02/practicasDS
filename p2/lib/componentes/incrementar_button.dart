@@ -13,7 +13,7 @@ class _IncrementarButtonState extends State<IncrementarButton> {
   @override
   void initState() {
     super.initState();
-    widget.controller.text = "0";
+    widget.controller.text = "1";
   }
 
   void incrementar() {
@@ -25,7 +25,7 @@ class _IncrementarButtonState extends State<IncrementarButton> {
 
   void decrementar() {
     final int valor = int.parse(widget.controller.text);
-    if (valor > 0) {
+    if (valor > 1) {
       widget.controller.text = (valor - 1).toString();
     }
   }
@@ -33,6 +33,7 @@ class _IncrementarButtonState extends State<IncrementarButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           decoration: BoxDecoration(
