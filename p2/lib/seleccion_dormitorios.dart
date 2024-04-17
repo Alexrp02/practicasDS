@@ -57,9 +57,9 @@ class _SeleccionDormitoriosState extends State<SeleccionDormitorios> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SeleccionTipoDormitorios(
-                        widget.casaBuilder,
-                        // int.parse(widget.numeroDormitoriosController.text),
-                        5),
+                      widget.casaBuilder,
+                      int.parse(widget.numeroDormitoriosController.text),
+                    ),
                   ),
                 ),
                 child: const Text(
