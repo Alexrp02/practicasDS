@@ -104,13 +104,20 @@ class _BanioSeleccionState extends State<BanioSeleccion> {
                 ),
                 onPressed: () {
                   Banio banio = BanioEstandar();
-                  if (_seleccion_decoradores["Jacuzzi"]!) {
-                    banio = BanioConJacuzzi(banio);
+                  if(_seleccion_decoradores["Bidet"] == true && _seleccion_decoradores["Jacuzzi"] == true){
+                    BanioConBidet bidet = BanioConBidet(banio);
+                    BanioConJacuzzi jacuzzi = BanioConJacuzzi(bidet);
+                    widget.casaBuilder.banio = jacuzzi;
+                  }else if(_seleccion_decoradores["Bidet"] == true){
+                    BanioConBidet bidet = BanioConBidet(banio);
+                    widget.casaBuilder.banio = bidet;
+                  }else if(_seleccion_decoradores["Jacuzzi"] == true){
+                    BanioConJacuzzi jacuzzi = BanioConJacuzzi(banio);
+                    widget.casaBuilder.banio = jacuzzi;
+                  }else{
+                    widget.casaBuilder.banio = banio;
                   }
-                  if (_seleccion_decoradores["Bidet"]!) {
-                    banio = BanioConBidet(banio);
-                  }
-                  widget.casaBuilder.banio = banio;
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

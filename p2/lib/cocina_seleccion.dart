@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:p2/componentes/header.dart';
 import 'package:p2/modelo/CasaBuilder.dart';
+import 'package:p2/modelo/CocinaConIsla.dart';
+import 'package:p2/modelo/CocinaConLavavajillas.dart';
+import 'package:p2/modelo/CocinaEstandar.dart';
+import 'package:p2/resultado_casa.dart';
 
 import 'componentes/button.dart';
 import 'modelo/Banio.dart';
+import 'modelo/Cocina.dart';
 
 class CocinaSeleccion extends StatefulWidget {
   final CasaBuilder casaBuilder;
@@ -99,6 +104,21 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                   side: const BorderSide(color: Colors.black, width: 3),
                 ),
                 onPressed: () {
+                  Cocina cocina = CocinaEstandar();
+                  if(_seleccion_decoradores["Lavavajillas"] == true && _seleccion_decoradores["Isla"] == true){
+                    CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
+                    CocinaConIsla isla = CocinaConIsla(lavavajillas);
+                    widget.casaBuilder.cocina = isla;
+                  }else if(_seleccion_decoradores["Isla"] == true){
+                    CocinaConIsla isla = CocinaConIsla(cocina);
+                    widget.casaBuilder.cocina = isla;
+                  }else if(_seleccion_decoradores["Lavavajillas"] == true){
+                    CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
+                    widget.casaBuilder.cocina = lavavajillas;
+                  }else{
+                    widget.casaBuilder.cocina = cocina;
+                  }
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(

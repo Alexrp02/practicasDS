@@ -89,26 +89,9 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
   @override
   void initState() {
     super.initState();
-    widget.casaBuilder.dormitorios = [];
-    Dormitorio d = Dormitorio("Dormitorio Ninos");
-    widget.casaBuilder.dormitorios.add(d);
-
-    Cocina cocina = CocinaEstandar();
-    CocinaConLavavajillas cocinaConLavavajillas = CocinaConLavavajillas(cocina);
-    CocinaConIsla coicnaConIsla = CocinaConIsla(cocinaConLavavajillas);
-
-    widget.casaBuilder.cocina = coicnaConIsla;
-
-    Banio banio = BanioEstandar();
-    BanioConJacuzzi jacuzzi = BanioConJacuzzi(banio);
-    BanioConBidet bidet = BanioConBidet(jacuzzi);
-
-    widget.casaBuilder.banio = bidet;
-
-
-
     directorCasa = DirectorCasa(widget.casaBuilder);
     directorCasa.construirCasa();
+
 
     if (directorCasa.builder.runtimeType == ChaletBuilder) {
       widget.tipo = "Chalet";
@@ -129,9 +112,16 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
     for(int i=0;i<directorCasa.builder.casa.dormitorios.length;i++){
       especificacionDormitorios += "Dormitorio ${i+1}: ${directorCasa.builder.casa.dormitorios[i].dormitorio}\n";
     }
-    dormitoriosImg.add("assets/dormitorioNiños.jpeg");
-    
-    
+
+
+    if(directorCasa.builder.casa.dormitorios.length>1){
+      dormitoriosImg.add("assets/dormitorioNiños.jpeg");
+    }
+    dormitoriosImg.add("assets/dormitorioMatrimonio.jpeg");
+
+
+
+
     salaDeEstarImg.add("assets/salaEstar.jpeg");
     
     cocinaImg.add("assets/cocina.jpg");
@@ -161,10 +151,10 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
     for(var i=0;i<partes.length;i++){
       if(partes[i]=="bidet"){
         banioImg.add("assets/bidet.jpg");
-        banioAsignado += " Con Lavavajillas";
+        banioAsignado += " Con Bidet";
       }else if(partes[i]=="jacuzzi"){
         banioImg.add("assets/jacuzzi.webp");
-        banioAsignado += " Con Isla";
+        banioAsignado += " Con Jacuzzi";
       }
     }
 
