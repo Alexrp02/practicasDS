@@ -27,15 +27,15 @@ class CustomButton extends StatelessWidget {
           height: 200,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16)),
-                  child: SizedBox(
-                    width: 200,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        topRight: Radius.circular(16)),
                     child: Image.asset(
+                      fit: BoxFit.cover,
                       image,
                     ),
                   ),
