@@ -33,9 +33,11 @@ class CustomButton extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16)),
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.cover,
+                  child: SizedBox(
+                    width: 200,
+                    child: Image.asset(
+                      image,
+                    ),
                   ),
                 ),
               ),
