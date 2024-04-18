@@ -1,31 +1,27 @@
-import 'Banio.dart';
 import 'CasaBuilder.dart';
-import 'Cocina.dart';
-import 'Dormitorio.dart';
 import 'SalaDeEstar.dart';
 
 class ChaletBuilder extends CasaBuilder{
 
   ChaletBuilder(){}
 
-  void setCocina(Cocina c){
-    c.tipo += "Chalet";
-    casa.cocina = c;
+  void setCocina(){
+    cocina.tipo = "Chalet";
+    casa.cocina = cocina;
   }
 
-  void setBanio(Banio b){
-    b.tipo += "Chalet";
-    casa.banio = b;
+  void setBanio(){
+    banio.tipo = "Chalet";
+    casa.banio = banio;
   }
 
-  void setSalaDeEstar(SalaDeEstar s){
-    s.salaDeEstar += " De Chalet";
-    casa.salaDeEstar = s;
+  void setSalaDeEstar(){
+    SalaDeEstar salaChalet = SalaDeEstar("Sala De Estar Chalet");
+    casa.salaDeEstar = salaChalet;
   }
 
-  void addDormitorio(Dormitorio d){
-    d.dormitorio += " De Chalet";
-    casa.addDormitorio(d);
+  void setDormitorios(){
+    casa.dormitorios = dormitorios;
   }
 
 }

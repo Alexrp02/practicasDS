@@ -5,7 +5,7 @@ import 'package:p2/componentes/header.dart';
 import 'package:p2/componentes/incrementar_button.dart';
 import 'package:p2/modelo/ApartamentoBuilder.dart';
 import 'package:p2/modelo/CasaBuilder.dart';
-import 'package:p2/modelo/CasaDeCampo.dart';
+import 'package:p2/modelo/CasaDeCampoBuilder.dart';
 
 import 'modelo/ChaletBuilder.dart';
 import 'seleccion_dormitorios.dart';

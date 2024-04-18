@@ -7,25 +7,17 @@ import 'SalaDeEstar.dart';
 
 class DirectorCasa{
     CasaBuilder builder;
-    Cocina cocina;
-    Banio banio;
-    SalaDeEstar sala;
-    List<Dormitorio>dormitorios;
 
-    DirectorCasa(this.builder,this.cocina,this.banio,this.sala,this.dormitorios);
+    DirectorCasa(this.builder);
 
     void construirCasa(){
 
       builder.crearCasa();
 
-      builder.setSalaDeEstar(sala);
-      builder.setCocina(cocina);
-      builder.setBanio(banio);
-
-      for (int i=0;i<dormitorios.length;i++){
-        builder.addDormitorio(dormitorios[i]);
-
-      }
+      builder.setSalaDeEstar();
+      builder.setCocina();
+      builder.setBanio();
+      builder.setDormitorios();
 
     }
 }
