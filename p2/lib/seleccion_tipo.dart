@@ -57,25 +57,28 @@ class _SeleccionTipoState extends State<SeleccionTipo> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             ),
             const SizedBox(height: 20),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomButton(
-                      onPressed: _seleccionarTipo,
-                      text: "Apartamento",
-                      image: "assets/apartamento.jpg"),
-                  const SizedBox(height: 20),
-                  CustomButton(
-                      onPressed: _seleccionarTipo,
-                      text: "Chalet",
-                      image: "assets/chalet.jpg"),
-                  const SizedBox(height: 20),
-                  CustomButton(
-                      onPressed: _seleccionarTipo,
-                      text: "Campestre",
-                      image: "assets/campestre.jpg"),
-                ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomButton(
+                        onPressed: _seleccionarTipo,
+                        text: "Apartamento",
+                        image: "assets/apartamento.jpg"),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                        onPressed: _seleccionarTipo,
+                        text: "Chalet",
+                        image: "assets/chalet.jpg"),
+                    const SizedBox(height: 20),
+                    CustomButton(
+                        onPressed: _seleccionarTipo,
+                        text: "Campestre",
+                        image: "assets/campestre.jpg"),
+                  ],
+                ),
               ),
             ),
           ],

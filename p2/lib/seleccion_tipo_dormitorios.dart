@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:p2/banio_seleccion.dart';
+import 'package:p2/modelo/Dormitorio.dart';
 
 import 'componentes/header.dart';
 import 'modelo/CasaBuilder.dart';
@@ -112,7 +114,19 @@ class _SeleccionTipoDormitoriosState extends State<SeleccionTipoDormitorios> {
                   foregroundColor: Colors.black,
                   side: const BorderSide(color: Colors.black, width: 3),
                 ),
-                onPressed: () => print("Hola"),
+                onPressed: () {
+                  widget.casaBuilder.dormitorios = (widget
+                      .tipoDormitoriosControllers
+                      .map((e) => Dormitorio(e.text))
+                      .toList());
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          BanioSeleccion(casaBuilder: widget.casaBuilder),
+                    ),
+                  );
+                },
                 child: const Text(
                   "Continuar",
                   style: TextStyle(
