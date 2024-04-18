@@ -1,5 +1,7 @@
 
 import 'package:p2/modelo/Banio.dart';
+import 'package:p2/modelo/BanioEstandar.dart';
+import 'package:p2/modelo/CocinaEstandar.dart';
 
 import 'Cocina.dart';
 import 'Dormitorio.dart';
@@ -11,7 +13,11 @@ class Casa{
   late SalaDeEstar salaDeEstar;
   late List<Dormitorio> dormitorios = [];
 
-  Casa.vacia(){}
+  Casa.vacia(){
+    cocina = CocinaEstandar();
+    banio = BanioEstandar();
+    salaDeEstar = SalaDeEstar("");
+  }
 
   Casa(Cocina c,Banio b,SalaDeEstar s,List<Dormitorio>d){
     cocina = c;

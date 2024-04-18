@@ -18,8 +18,7 @@ class ApartamentoBuilder extends CasaBuilder {
   }
 
   void setSalaDeEstar(){
-    SalaDeEstar salaChalet = SalaDeEstar("Sala de Estar de Apartamento");
-    casa.salaDeEstar = salaChalet;
+    casa.salaDeEstar = SalaDeEstar("Sala de Estar de Apartamento");
   }
 
   void setDormitorios(){
