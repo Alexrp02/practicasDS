@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:p2/componentes/header.dart';
-import 'package:p2/modelo/BanioConBidet.dart';
-import 'package:p2/modelo/BanioConJacuzzi.dart';
-import 'package:p2/modelo/BanioEstandar.dart';
 import 'package:p2/modelo/CasaBuilder.dart';
 
-import 'cocina_seleccion.dart';
 import 'componentes/button.dart';
 import 'modelo/Banio.dart';
 
-class BanioSeleccion extends StatefulWidget {
+class CocinaSeleccion extends StatefulWidget {
   final CasaBuilder casaBuilder;
-  const BanioSeleccion({
+  const CocinaSeleccion({
     super.key,
     required this.casaBuilder,
   });
 
   @override
-  _BanioSeleccionState createState() => _BanioSeleccionState();
+  _CocinaSeleccionState createState() => _CocinaSeleccionState();
 }
 
-class _BanioSeleccionState extends State<BanioSeleccion> {
+class _CocinaSeleccionState extends State<CocinaSeleccion> {
   final Map<String, bool> _seleccion_decoradores = {
-    "Jacuzzi": false,
-    "Bidet": false,
+    "Isla": false,
+    "Lavavajillas": false,
   };
 
   void _seleccionarDecorador(String decorador) {
@@ -62,28 +58,28 @@ class _BanioSeleccionState extends State<BanioSeleccion> {
                     Container(
                       padding: EdgeInsets.zero,
                       decoration: BoxDecoration(
-                          border: _seleccion_decoradores["Jacuzzi"]!
+                          border: _seleccion_decoradores["Isla"]!
                               ? Border.all(
                                   width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
                           onPressed: _seleccionarDecorador,
-                          text: "Jacuzzi",
-                          image: "assets/jacuzzi.webp"),
+                          text: "Isla",
+                          image: "assets/isla.jpg"),
                     ),
                     const SizedBox(height: 40),
                     Container(
                       decoration: BoxDecoration(
-                          border: _seleccion_decoradores["Bidet"]!
+                          border: _seleccion_decoradores["Lavavajillas"]!
                               ? Border.all(
                                   width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
                           onPressed: _seleccionarDecorador,
-                          text: "Bidet",
-                          image: "assets/bidet.jpg"),
+                          text: "Lavavajillas",
+                          image: "assets/lavavajillas.jpg"),
                     ),
                   ],
                 ),
@@ -103,14 +99,6 @@ class _BanioSeleccionState extends State<BanioSeleccion> {
                   side: const BorderSide(color: Colors.black, width: 3),
                 ),
                 onPressed: () {
-                  Banio banio = BanioEstandar();
-                  if (_seleccion_decoradores["Jacuzzi"]!) {
-                    banio = BanioConJacuzzi(banio);
-                  }
-                  if (_seleccion_decoradores["Bidet"]!) {
-                    banio = BanioConBidet(banio);
-                  }
-                  widget.casaBuilder.banio = banio;
                   Navigator.push(
                     context,
                     MaterialPageRoute(
