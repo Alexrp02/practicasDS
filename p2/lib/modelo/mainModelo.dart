@@ -32,10 +32,8 @@ main(List<String> args) {
 
 
   ChaletBuilder builderChalet = ChaletBuilder();
-    builderChalet.cocina = cocinaConLavavajillas;
+  builderChalet.cocina = cocinaConLavavajillas;
   builderChalet.banio = banioConJacuzzi;
-
-
 
   List<Dormitorio> dormitorios = [];
 
