@@ -83,6 +83,7 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
   void initState() {
     super.initState();
 
+    print("CASA TIPO: "+widget.casa.tipo+"\n");
 
     if (widget.casa.tipo == "Chalet") {
       tipoDeCasaImg.add("assets/chalet.jpg");
