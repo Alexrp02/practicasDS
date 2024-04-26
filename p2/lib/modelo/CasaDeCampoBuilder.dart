@@ -5,26 +5,28 @@ import 'Cocina.dart';
 import 'Dormitorio.dart';
 import 'SalaDeEstar.dart';
 
-class CasaDeCampoBuilder extends CasaBuilder{
+class CasaDeCampoBuilder extends CasaBuilder {
+  CasaDeCampoBuilder() {
+    casa.tipo = "Casa de Campo";
+  }
 
-  CasaDeCampoBuilder(){}
-
-  void setCocina(){
+  void setCocina() {
     cocina.tipo = "Casa de Campo";
     casa.cocina = cocina;
   }
 
-  void setBanio(){
+  void setBanio() {
     banio.tipo = "Casa de Campo";
     casa.banio = banio;
   }
 
-  void setSalaDeEstar(){
+  void setSalaDeEstar() {
     SalaDeEstar salaChalet = SalaDeEstar("Sala de Estar de CasaDeCampo");
     casa.salaDeEstar = salaChalet;
   }
 
-  void setDormitorios(){
+  void setDormitorios() {
     casa.dormitorios = dormitorios;
   }
 }
+
