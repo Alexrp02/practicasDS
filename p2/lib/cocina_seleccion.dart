@@ -47,7 +47,7 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("¿Quieres añadirle algo a los baños?",
+                  Text("¿Quieres añadirle algo a la cocina?",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ],
