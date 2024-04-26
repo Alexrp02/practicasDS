@@ -19,6 +19,7 @@ import 'modelo/CasaBuilder.dart';
 import 'modelo/CasaDeCampoBuilder.dart';
 import 'modelo/ChaletBuilder.dart';
 import 'modelo/CocinaConIsla.dart';
+import 'modelo/globals.dart' as globals;
 
 class ItemListaFinal extends StatelessWidget {
   final String texto;
@@ -144,6 +145,7 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
         banioAsignado += " Con Jacuzzi";
       }
     }
+    globals.casasCreadas.add(directorCasa.builder.casa);
   }
 
   @override
