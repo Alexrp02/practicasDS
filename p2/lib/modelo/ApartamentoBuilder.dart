@@ -4,6 +4,7 @@ import 'SalaDeEstar.dart';
 
 class ApartamentoBuilder extends CasaBuilder {
   ApartamentoBuilder() {
+    crearCasa();
     casa.tipo = "Apartamento";
   }
 

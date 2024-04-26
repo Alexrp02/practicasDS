@@ -7,6 +7,7 @@ import 'SalaDeEstar.dart';
 
 class CasaDeCampoBuilder extends CasaBuilder {
   CasaDeCampoBuilder() {
+    crearCasa();
     casa.tipo = "Casa de Campo";
   }
 
@@ -29,4 +30,3 @@ class CasaDeCampoBuilder extends CasaBuilder {
     casa.dormitorios = dormitorios;
   }
 }
-
