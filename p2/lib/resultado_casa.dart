@@ -15,6 +15,7 @@ import 'package:p2/seleccion_tipo.dart';
 import 'componentes/header.dart';
 import 'modelo/ApartamentoBuilder.dart';
 import 'modelo/Banio.dart';
+import 'modelo/Casa.dart';
 import 'modelo/CasaBuilder.dart';
 import 'modelo/CasaDeCampoBuilder.dart';
 import 'modelo/ChaletBuilder.dart';
@@ -60,16 +61,14 @@ class ItemListaFinal extends StatelessWidget {
 }
 
 class ResultadoCasa extends StatefulWidget {
-  final CasaBuilder casaBuilder;
-  String tipo = "";
+  final Casa casa;
 
-  ResultadoCasa({super.key, required this.casaBuilder});
+  ResultadoCasa({super.key, required this.casa});
   @override
   _ResultadoCasaState createState() => _ResultadoCasaState();
 }
 
 class _ResultadoCasaState extends State<ResultadoCasa> {
-  late DirectorCasa directorCasa;
   List<String> banioImg = [];
   List<String> cocinaImg = [];
   List<String> dormitoriosImg = [];
@@ -83,28 +82,22 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
   @override
   void initState() {
     super.initState();
-    directorCasa = DirectorCasa(widget.casaBuilder);
-    directorCasa.construirCasa();
 
-    if (directorCasa.builder.runtimeType == ChaletBuilder) {
-      widget.tipo = "Chalet";
+
+    if (widget.casa.tipo == "Chalet") {
       tipoDeCasaImg.add("assets/chalet.jpg");
-    } else if (directorCasa.builder.runtimeType == CasaDeCampoBuilder) {
-      widget.tipo = "Casa de Campo";
+    } else if (widget.casa.tipo == "Casa de Campo") {
       tipoDeCasaImg.add("assets/campestre.jpg");
-    } else if (directorCasa.builder.runtimeType == ApartamentoBuilder) {
-      widget.tipo = "Apartamento";
+    } else if (widget.casa.tipo == "Apartamento") {
       tipoDeCasaImg.add("assets/apartamento.jpg");
-    } else {
-      widget.tipo = "Error";
     }
 
-    for (int i = 0; i < directorCasa.builder.casa.dormitorios.length; i++) {
+    for (int i = 0; i < widget.casa.dormitorios.length; i++) {
       especificacionDormitorios +=
-          "Dormitorio ${i + 1}: ${directorCasa.builder.casa.dormitorios[i].dormitorio}\n";
+          "Dormitorio ${i + 1}: ${widget.casa.dormitorios[i].dormitorio}\n";
     }
 
-    if (directorCasa.builder.casa.dormitorios.length > 1) {
+    if (widget.casa.dormitorios.length > 1) {
       dormitoriosImg.add("assets/dormitorioNiños.jpeg");
     }
     dormitoriosImg.add("assets/dormitorioMatrimonio.jpeg");
@@ -113,7 +106,7 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
 
     cocinaImg.add("assets/cocina.jpg");
 
-    cocinaAsignada = directorCasa.builder.casa.cocina.toString();
+    cocinaAsignada = widget.casa.cocina.toString();
     List<String> partes = cocinaAsignada.split(" ");
 
     cocinaAsignada = "";
@@ -130,7 +123,7 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
 
     banioImg.add("assets/baño.webp");
 
-    banioAsignado = directorCasa.builder.casa.banio.toString();
+    banioAsignado = widget.casa.banio.toString();
     partes = banioAsignado.split(" ");
 
     banioAsignado = "";
@@ -167,16 +160,16 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
                 scrollDirection: Axis.vertical, // Cambiar a vertical
                 children: [
                   SizedBox(height: 20), // Espacio arriba
-                  ItemListaFinal(texto: widget.tipo, img: tipoDeCasaImg),
+                  ItemListaFinal(texto: widget.casa.tipo, img: tipoDeCasaImg),
                   SizedBox(height: 20), // Espacio entre elementos
                   ItemListaFinal(
                       texto:
-                          "Tienes ${directorCasa.builder.casa.dormitorios.length} dormitorios \n" +
+                          "Tienes ${widget.casa.dormitorios.length} dormitorios \n" +
                               especificacionDormitorios,
                       img: dormitoriosImg),
                   SizedBox(height: 20), // Espacio entre elementos
                   ItemListaFinal(
-                      texto: directorCasa.builder.casa.salaDeEstar.toString(),
+                      texto: widget.casa.salaDeEstar.toString(),
                       img: salaDeEstarImg),
                   SizedBox(height: 20), // Espacio entre elementos
                   ItemListaFinal(
