@@ -12,8 +12,6 @@ class DirectorCasa{
 
     void construirCasa(){
 
-      builder.crearCasa();
-
       builder.setSalaDeEstar();
       builder.setCocina();
       builder.setBanio();

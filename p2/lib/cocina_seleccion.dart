@@ -4,10 +4,12 @@ import 'package:p2/modelo/CasaBuilder.dart';
 import 'package:p2/modelo/CocinaConIsla.dart';
 import 'package:p2/modelo/CocinaConLavavajillas.dart';
 import 'package:p2/modelo/CocinaEstandar.dart';
+import 'package:p2/modelo/DirectorCasa.dart';
 import 'package:p2/resultado_casa.dart';
 
 import 'componentes/button.dart';
 import 'modelo/Banio.dart';
+import 'modelo/Casa.dart';
 import 'modelo/Cocina.dart';
 
 class CocinaSeleccion extends StatefulWidget {
@@ -119,11 +121,15 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                     widget.casaBuilder.cocina = cocina;
                   }
 
+                  DirectorCasa directorCasa = DirectorCasa(widget.casaBuilder);
+                  directorCasa.construirCasa();
+                  Casa casaCreada = directorCasa.builder.casa;
+
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          ResultadoCasa(casaBuilder: widget.casaBuilder),
+                          ResultadoCasa(casa: casaCreada),
                     ),
                   );
                 },

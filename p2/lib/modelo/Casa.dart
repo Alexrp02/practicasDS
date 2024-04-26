@@ -17,6 +17,7 @@ class Casa {
     cocina = CocinaEstandar();
     banio = BanioEstandar();
     salaDeEstar = SalaDeEstar("");
+    tipo = "";
   }
 
   Casa(Cocina c, Banio b, SalaDeEstar s, List<Dormitorio> d) {
