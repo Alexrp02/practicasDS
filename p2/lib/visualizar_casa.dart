@@ -61,15 +61,15 @@ class ItemListaFinal extends StatelessWidget {
   }
 }
 
-class ResultadoCasa extends StatefulWidget {
+class VisualizarCasa extends StatefulWidget {
   final Casa casa;
 
-  ResultadoCasa({super.key, required this.casa});
+  VisualizarCasa({super.key, required this.casa});
   @override
-  _ResultadoCasaState createState() => _ResultadoCasaState();
+  _VisualizarCasaState createState() => _VisualizarCasaState();
 }
 
-class _ResultadoCasaState extends State<ResultadoCasa> {
+class _VisualizarCasaState extends State<VisualizarCasa> {
   List<String> banioImg = [];
   List<String> cocinaImg = [];
   List<String> dormitoriosImg = [];
@@ -193,16 +193,10 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
                         side: const BorderSide(color: Colors.black, width: 3),
                       ),
                       onPressed: () {
-                        globals.casasCreadas.add(widget.casa);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PantallaFinal(),
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                       child: const Text(
-                        "Continuar",
+                        "Volver",
                         style: TextStyle(
                           fontSize: 40,
                         ),
