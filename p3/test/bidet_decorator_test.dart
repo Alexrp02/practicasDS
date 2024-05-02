@@ -7,6 +7,7 @@ import 'package:p2/modelo/Casa.dart';
 import 'package:p2/modelo/CasaDeCampoBuilder.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:p2/modelo/CocinaEstandar.dart';
+import 'package:p2/modelo/Dormitorio.dart';
 
 void main() {
   group('Pruebas con el decorador de baño', () {
@@ -25,8 +26,9 @@ void main() {
     apartamentoBuilder.setCocina();
 
     Banio banio = BanioEstandar();
-    banio = BanioConBidet(banio);
+
     test('Prueba de decorador de baño con un decorador de bidet', () {
+      banio = BanioConBidet(banio);
       expect(banio.toString(), "Baño Con bidet");
     });
 
@@ -49,5 +51,54 @@ void main() {
       expect(casa.banio.toString(), "Baño Con bidet Con jacuzzi");
       expect(casa.banio.tipo, "Apartamento");
     });
+
+    test('Creación de un Apartamento con un baño con  2 bidet y un jacuzzi',
+            () {
+          banio = BanioEstandar();
+          banio = BanioConBidet(banio);
+          banio = BanioConBidet(banio);
+          banio = BanioConJacuzzi(banio);
+
+          apartamentoBuilder.banio = banio;
+          apartamentoBuilder.setBanio();
+
+          Casa casa = apartamentoBuilder.casa;
+          expect(casa.banio.toString(), "Baño Con bidet Con bidet Con jacuzzi");
+        });
+
+    /*test("Comprobación de que una casa no se puede crear sin Baño", () {
+      casaDeCampoBuilder = CasaDeCampoBuilder();
+      casaDeCampoBuilder.cocina = CocinaEstandar();
+      casaDeCampoBuilder.dormitorios = [];
+      casaDeCampoBuilder.setDormitorios();
+      casaDeCampoBuilder.setSalaDeEstar();
+      casaDeCampoBuilder.setCocina();
+      expect(casaDeCampoBuilder.banio, null);
+    });*/
+
+
+
+
+    test('Comprobación de que todos los atributos estan instanciados, metodo toString de Casa',
+            () {
+              banio = BanioEstandar();
+              banio = BanioConBidet(banio);
+              banio = BanioConJacuzzi(banio);
+
+              apartamentoBuilder.banio = banio;
+              apartamentoBuilder.dormitorios = [];
+              apartamentoBuilder.dormitorios.add(Dormitorio("Sala 1"));
+              apartamentoBuilder.dormitorios.add(Dormitorio("Sala 2"));
+              apartamentoBuilder.dormitorios.add(Dormitorio("Sala 3"));
+              apartamentoBuilder.setDormitorios();
+              apartamentoBuilder.setBanio();
+
+              Casa casa = apartamentoBuilder.casa;
+              expect(casa.banio.toString(), "Baño Con bidet Con jacuzzi");
+              expect(casa.dormitorios.length, 3);
+              expect(casa.salaDeEstar.toString(), "Sala de Estar de Apartamento");
+              expect(casa.toString(), "ESPECIFICACIONES CASA: \nApartamentoCocina Apartamento \nBaño Con bidet Con jacuzzi Apartamento\nSala de Estar de Apartamento\n[Sala 1, Sala 2, Sala 3]\n");
+        });
+
   });
 }
