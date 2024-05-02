@@ -14,7 +14,7 @@ class ApartamentoBuilder extends CasaBuilder {
   }
 
   void setBanio() {
-    cocina.tipo = "Apartamento";
+    banio.tipo = "Apartamento";
     casa.banio = banio;
   }
 
