@@ -1,4 +1,5 @@
 
+import 'package:p2/modelo/ApartamentoBuilder.dart';
 import 'package:p2/modelo/BanioEstandar.dart';
 import 'package:p2/modelo/Casa.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +20,11 @@ void main() {
      chaletBuilder.setBanio();
 
      CasaDeCampoBuilder casaDeCampoBuilder = CasaDeCampoBuilder();
+     casaDeCampoBuilder.banio = BanioEstandar();
+     casaDeCampoBuilder.dormitorios = [];
+     casaDeCampoBuilder.setDormitorios();
+     casaDeCampoBuilder.setSalaDeEstar();
+     casaDeCampoBuilder.setBanio();
      Cocina cocina = CocinaEstandar();
 
      test('Prueba de creacion de un Chalet con decorador de isla y lavavajillas', () {
@@ -46,6 +52,37 @@ void main() {
        expect(globals.casasCreadas.length, 2);
        expect(globals.casasCreadas[0].tipo, "Chalet");
        expect(globals.casasCreadas[1].tipo, 'Casa de Campo');
+     });
+
+     test('Prueba de una cocina con una isla y un apartamento', (){
+       Casa apartamento = ApartamentoBuilder().casa;
+       Cocina cocinaApartamentoIsla = CocinaEstandar();
+       cocinaApartamentoIsla = CocinaConIsla(cocinaApartamentoIsla);
+       expect(apartamento.tipo, "Apartamento");
+       expect(cocinaApartamentoIsla.toString(), "Cocina Con isla");
+     });
+
+     test('Prueba de decorar una cocina de una casa de campo con tres lavavajillas', (){
+       Casa casaDeCampoTresLavavajillas = casaDeCampoBuilder.casa;
+       Cocina cocinaTresLavavajillas = CocinaEstandar();
+       cocinaTresLavavajillas = CocinaConLavavajillas(cocinaTresLavavajillas);
+       cocinaTresLavavajillas = CocinaConLavavajillas(cocinaTresLavavajillas);
+       cocinaTresLavavajillas = CocinaConLavavajillas(cocinaTresLavavajillas);
+       casaDeCampoBuilder.cocina = cocinaTresLavavajillas;
+       casaDeCampoBuilder.setCocina();
+       expect(casaDeCampoTresLavavajillas.tipo, "Casa de Campo");
+       expect(casaDeCampoTresLavavajillas.toString(), "ESPECIFICACIONES CASA: \nCocina Con lavavajillas Con lavavajillas Con lavavajillas Casa de Campo "
+           "\nBaño Casa de Campo\nSala de Estar de CasaDeCampo\n[]\n");
+     });
+     
+     test('Prueba de añadirle a una cocina multiples islas y lavavajillas', (){
+       Cocina cocinaMultiplesDecorados = CocinaEstandar();
+       cocinaMultiplesDecorados = CocinaConIsla(cocinaMultiplesDecorados);
+       cocinaMultiplesDecorados = CocinaConLavavajillas(cocinaMultiplesDecorados);
+       cocinaMultiplesDecorados = CocinaConIsla(cocinaMultiplesDecorados);
+       cocinaMultiplesDecorados = CocinaConLavavajillas(cocinaMultiplesDecorados);
+       cocinaMultiplesDecorados = CocinaConIsla(cocinaMultiplesDecorados);
+       expect(cocinaMultiplesDecorados.toString(), "Cocina Con isla Con lavavajillas Con isla Con lavavajillas Con isla");
      });
   });
 }
