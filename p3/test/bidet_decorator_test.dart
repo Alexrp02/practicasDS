@@ -66,17 +66,17 @@ void main() {
           expect(casa.banio.toString(), "Baño Con bidet Con bidet Con jacuzzi");
         });
 
-    /*test("Comprobación de que una casa no se puede crear sin Baño", () {
+    test("Comprobación de que una casa no se puede crear sin Baño", () {
       casaDeCampoBuilder = CasaDeCampoBuilder();
       casaDeCampoBuilder.cocina = CocinaEstandar();
       casaDeCampoBuilder.dormitorios = [];
       casaDeCampoBuilder.setDormitorios();
       casaDeCampoBuilder.setSalaDeEstar();
       casaDeCampoBuilder.setCocina();
-      expect(casaDeCampoBuilder.banio, null);
-    });*/
-
-
+      expect(()=>
+          casaDeCampoBuilder.setBanio(), throwsException
+      );
+    });
 
 
     test('Comprobación de que todos los atributos estan instanciados, metodo toString de Casa',

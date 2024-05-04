@@ -12,13 +12,23 @@ class CasaDeCampoBuilder extends CasaBuilder {
   }
 
   void setCocina() {
-    cocina.tipo = "Casa de Campo";
-    casa.cocina = cocina;
+    if(cocina==null){
+      throw Exception('La cocina no está inicializada');
+    }else{
+      cocina?.tipo = "Casa de Campo";
+      casa.cocina = cocina!;
+    }
   }
 
+
   void setBanio() {
-    banio.tipo = "Casa de Campo";
-    casa.banio = banio;
+    if(banio==null){
+      throw Exception('El baño no está inicializado');
+    }else{
+      banio?.tipo = "Casa de Campo";
+      casa.banio = banio!;
+    }
+
   }
 
   void setSalaDeEstar() {

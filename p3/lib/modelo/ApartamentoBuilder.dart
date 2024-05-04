@@ -9,13 +9,23 @@ class ApartamentoBuilder extends CasaBuilder {
   }
 
   void setCocina() {
-    cocina.tipo = "Apartamento";
-    casa.cocina = cocina;
+    if(cocina==null){
+      throw Exception('La cocina no está inicializada');
+    }else{
+      cocina?.tipo = "Apartamento";
+      casa.cocina = cocina!;
+    }
   }
 
+
   void setBanio() {
-    banio.tipo = "Apartamento";
-    casa.banio = banio;
+    if(banio==null){
+      throw Exception('El baño no está inicializado');
+    }else{
+      banio?.tipo = "Apartamento";
+      casa.banio = banio!;
+    }
+
   }
 
   void setSalaDeEstar() {

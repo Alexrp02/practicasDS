@@ -8,13 +8,23 @@ class ChaletBuilder extends CasaBuilder {
   }
 
   void setCocina() {
-    cocina.tipo = "Chalet";
-    casa.cocina = cocina;
+    if(cocina==null){
+      throw Exception('La cocina no está inicializada');
+    }else{
+      cocina?.tipo = "Chalet";
+      casa.cocina = cocina!;
+    }
   }
 
+
   void setBanio() {
-    banio.tipo = "Chalet";
-    casa.banio = banio;
+    if(banio==null){
+      throw Exception('El baño no está inicializado');
+    }else{
+      banio?.tipo = "Chalet";
+      casa.banio = banio!;
+    }
+
   }
 
   void setSalaDeEstar() {

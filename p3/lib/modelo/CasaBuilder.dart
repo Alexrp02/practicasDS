@@ -9,9 +9,9 @@ import 'Cocina.dart';
 abstract class CasaBuilder{
 
   late Casa casa;
-  late Banio banio;
-  late Cocina cocina;
-  late List<Dormitorio>dormitorios;
+  Banio? banio;
+  Cocina? cocina;
+  List<Dormitorio>dormitorios = [];
 
   void crearCasa(){
     casa = Casa.vacia();
