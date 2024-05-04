@@ -108,6 +108,7 @@ void main() {
   });
 
   group('Pruebas con el decorador de cocina Grupo2', () {
+
     ChaletBuilder chaletBuilder = ChaletBuilder();
     chaletBuilder.banio = BanioEstandar();
     chaletBuilder.dormitorios = [];
