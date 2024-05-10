@@ -1,0 +1,208 @@
+<html>
+<head>
+<title>p3_test.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #bcbec4;}
+.s1 { color: #6aab73;}
+.s2 { color: #bcbec4;}
+.s3 { color: #cf8e6d;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+p3_test.dart</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">'package:p2/modelo/ApartamentoBuilder.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/Banio.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/BanioConBidet.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/BanioConJacuzzi.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/BanioEstandar.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/Casa.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/CasaDeCampoBuilder.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:flutter_test/flutter_test.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/ChaletBuilder.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/Cocina.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/CocinaConIsla.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/CocinaConLavavajillas.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/CocinaEstandar.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/Dormitorio.dart'</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">'package:p2/modelo/globals.dart' </span><span class="s0">as globals</span><span class="s2">;</span>
+
+<span class="s3">void </span><span class="s0">main</span><span class="s2">() {</span>
+  <span class="s0">group</span><span class="s2">(</span><span class="s1">'Pruebas con el decorador de baño Grupo1'</span><span class="s2">, () {</span>
+    <span class="s0">CasaDeCampoBuilder casaDeCampoBuilder </span><span class="s2">= </span><span class="s0">CasaDeCampoBuilder</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">cocina </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setSalaDeEstar</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setCocina</span><span class="s2">();</span>
+
+    <span class="s0">ApartamentoBuilder apartamentoBuilder </span><span class="s2">= </span><span class="s0">ApartamentoBuilder</span><span class="s2">();</span>
+    <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">cocina </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+    <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+    <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+    <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setSalaDeEstar</span><span class="s2">();</span>
+    <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setCocina</span><span class="s2">();</span>
+
+    <span class="s0">Banio banio </span><span class="s2">= </span><span class="s0">BanioEstandar</span><span class="s2">();</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de decorador de baño con un decorador de bidet'</span><span class="s2">, () {</span>
+      <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConBidet</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Baño Con bidet&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de creacion de una casa de campo con un baño con un bidet'</span><span class="s2">,</span>
+            <span class="s2">() {</span>
+          <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">banio</span><span class="s2">;</span>
+          <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+          <span class="s0">Casa casa </span><span class="s2">= </span><span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Baño Con bidet&quot;</span><span class="s2">);</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">&quot;Casa de Campo&quot;</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span>
+        <span class="s1">'Prueba de creacion de un apartamento con un baño con bidet y con Jacuzzi'</span><span class="s2">,</span>
+            <span class="s2">() {</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConJacuzzi</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">banio</span><span class="s2">;</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+          <span class="s0">Casa casa </span><span class="s2">= </span><span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Baño Con bidet Con jacuzzi&quot;</span><span class="s2">);</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">&quot;Apartamento&quot;</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Creación de un Apartamento con un baño con  2 bidet y un jacuzzi'</span><span class="s2">,</span>
+            <span class="s2">() {</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioEstandar</span><span class="s2">();</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConBidet</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConBidet</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConJacuzzi</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">banio</span><span class="s2">;</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+
+          <span class="s0">Casa casa </span><span class="s2">= </span><span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Baño Con bidet Con bidet Con jacuzzi&quot;</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">&quot;Comprobación de que una casa no se puede crear sin Baño&quot;</span><span class="s2">, () {</span>
+      <span class="s0">casaDeCampoBuilder </span><span class="s2">= </span><span class="s0">CasaDeCampoBuilder</span><span class="s2">();</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">cocina </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setSalaDeEstar</span><span class="s2">();</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setCocina</span><span class="s2">();</span>
+      <span class="s0">expect</span><span class="s2">(()=&gt;</span>
+          <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">(), </span><span class="s0">throwsException</span>
+      <span class="s2">);</span>
+    <span class="s2">});</span>
+
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Comprobación de que todos los atributos estan instanciados, metodo toString de Casa'</span><span class="s2">,</span>
+            <span class="s2">() {</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioEstandar</span><span class="s2">();</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConBidet</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+          <span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioConJacuzzi</span><span class="s2">(</span><span class="s0">banio</span><span class="s2">);</span>
+
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">banio</span><span class="s2">;</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">dormitorios</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">Dormitorio</span><span class="s2">(</span><span class="s1">&quot;Sala 1&quot;</span><span class="s2">));</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">dormitorios</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">Dormitorio</span><span class="s2">(</span><span class="s1">&quot;Sala 2&quot;</span><span class="s2">));</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">dormitorios</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">Dormitorio</span><span class="s2">(</span><span class="s1">&quot;Sala 3&quot;</span><span class="s2">));</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+          <span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+
+          <span class="s0">Casa casa </span><span class="s2">= </span><span class="s0">apartamentoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">banio</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Baño Con bidet Con jacuzzi&quot;</span><span class="s2">);</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">dormitorios</span><span class="s2">.</span><span class="s0">length</span><span class="s2">, </span><span class="s4">3</span><span class="s2">);</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">salaDeEstar</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Sala de Estar de Apartamento&quot;</span><span class="s2">);</span>
+          <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;ESPECIFICACIONES CASA: \nApartamentoCocina Apartamento \nBaño Con bidet Con jacuzzi Apartamento\nSala de Estar de Apartamento\n[Sala 1, Sala 2, Sala 3]\n&quot;</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+  <span class="s2">});</span>
+
+  <span class="s0">group</span><span class="s2">(</span><span class="s1">'Pruebas con el decorador de cocina Grupo2'</span><span class="s2">, () {</span>
+
+    <span class="s0">ChaletBuilder chaletBuilder </span><span class="s2">= </span><span class="s0">ChaletBuilder</span><span class="s2">();</span>
+    <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioEstandar</span><span class="s2">();</span>
+    <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+    <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+    <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">setSalaDeEstar</span><span class="s2">();</span>
+    <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+
+    <span class="s0">CasaDeCampoBuilder casaDeCampoBuilder </span><span class="s2">= </span><span class="s0">CasaDeCampoBuilder</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">banio </span><span class="s2">= </span><span class="s0">BanioEstandar</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">dormitorios </span><span class="s2">= [];</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setDormitorios</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setSalaDeEstar</span><span class="s2">();</span>
+    <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setBanio</span><span class="s2">();</span>
+    <span class="s0">Cocina cocina </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de creacion de un Chalet con decorador de isla y lavavajillas'</span><span class="s2">, () {</span>
+      <span class="s0">cocina </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocina</span><span class="s2">);</span>
+      <span class="s0">cocina </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocina</span><span class="s2">);</span>
+      <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">cocina </span><span class="s2">= </span><span class="s0">cocina</span><span class="s2">;</span>
+      <span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">setCocina</span><span class="s2">();</span>
+      <span class="s0">Casa casa </span><span class="s2">= </span><span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">casa</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;ESPECIFICACIONES CASA: \nCocina Con isla Con lavavajillas Chalet &quot;</span>
+          <span class="s1">&quot;\nBaño Chalet\nSala De Estar Chalet\n[]\n&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de decorador de cocina con dos islas'</span><span class="s2">, (){</span>
+      <span class="s0">Cocina cocinaDobleIsla </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+      <span class="s0">cocinaDobleIsla </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaDobleIsla</span><span class="s2">);</span>
+      <span class="s0">cocinaDobleIsla </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaDobleIsla</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">cocinaDobleIsla</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Cocina Con isla Con isla&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba Singleton ListaCasas'</span><span class="s2">, (){</span>
+      <span class="s0">Casa chalet </span><span class="s2">= </span><span class="s0">chaletBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+      <span class="s0">Casa casaDeCampo </span><span class="s2">= </span><span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+      <span class="s0">globals</span><span class="s2">.</span><span class="s0">casasCreadas</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">chalet</span><span class="s2">);</span>
+      <span class="s0">globals</span><span class="s2">.</span><span class="s0">casasCreadas</span><span class="s2">.</span><span class="s0">add</span><span class="s2">(</span><span class="s0">casaDeCampo</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">globals</span><span class="s2">.</span><span class="s0">casasCreadas</span><span class="s2">.</span><span class="s0">length</span><span class="s2">, </span><span class="s4">2</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">globals</span><span class="s2">.</span><span class="s0">casasCreadas</span><span class="s2">[</span><span class="s4">0</span><span class="s2">].</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">&quot;Chalet&quot;</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">globals</span><span class="s2">.</span><span class="s0">casasCreadas</span><span class="s2">[</span><span class="s4">1</span><span class="s2">].</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">'Casa de Campo'</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de una cocina con una isla y un apartamento'</span><span class="s2">, (){</span>
+      <span class="s0">Casa apartamento </span><span class="s2">= </span><span class="s0">ApartamentoBuilder</span><span class="s2">().</span><span class="s0">casa</span><span class="s2">;</span>
+      <span class="s0">Cocina cocinaApartamentoIsla </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+      <span class="s0">cocinaApartamentoIsla </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaApartamentoIsla</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">apartamento</span><span class="s2">.</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">&quot;Apartamento&quot;</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">cocinaApartamentoIsla</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Cocina Con isla&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de decorar una cocina de una casa de campo con tres lavavajillas'</span><span class="s2">, (){</span>
+      <span class="s0">Casa casaDeCampoTresLavavajillas </span><span class="s2">= </span><span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">casa</span><span class="s2">;</span>
+      <span class="s0">Cocina cocinaTresLavavajillas </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+      <span class="s0">cocinaTresLavavajillas </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocinaTresLavavajillas</span><span class="s2">);</span>
+      <span class="s0">cocinaTresLavavajillas </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocinaTresLavavajillas</span><span class="s2">);</span>
+      <span class="s0">cocinaTresLavavajillas </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocinaTresLavavajillas</span><span class="s2">);</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">cocina </span><span class="s2">= </span><span class="s0">cocinaTresLavavajillas</span><span class="s2">;</span>
+      <span class="s0">casaDeCampoBuilder</span><span class="s2">.</span><span class="s0">setCocina</span><span class="s2">();</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">casaDeCampoTresLavavajillas</span><span class="s2">.</span><span class="s0">tipo</span><span class="s2">, </span><span class="s1">&quot;Casa de Campo&quot;</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">casaDeCampoTresLavavajillas</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;ESPECIFICACIONES CASA: \nCocina Con lavavajillas Con lavavajillas Con lavavajillas Casa de Campo &quot;</span>
+          <span class="s1">&quot;\nBaño Casa de Campo\nSala de Estar de CasaDeCampo\n[]\n&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+
+    <span class="s0">test</span><span class="s2">(</span><span class="s1">'Prueba de añadirle a una cocina multiples islas y lavavajillas'</span><span class="s2">, (){</span>
+      <span class="s0">Cocina cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaEstandar</span><span class="s2">();</span>
+      <span class="s0">cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">);</span>
+      <span class="s0">cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">);</span>
+      <span class="s0">cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">);</span>
+      <span class="s0">cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaConLavavajillas</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">);</span>
+      <span class="s0">cocinaMultiplesDecorados </span><span class="s2">= </span><span class="s0">CocinaConIsla</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">);</span>
+      <span class="s0">expect</span><span class="s2">(</span><span class="s0">cocinaMultiplesDecorados</span><span class="s2">.</span><span class="s0">toString</span><span class="s2">(), </span><span class="s1">&quot;Cocina Con isla Con lavavajillas Con isla Con lavavajillas Con isla&quot;</span><span class="s2">);</span>
+    <span class="s2">});</span>
+  <span class="s2">});</span>
+
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
