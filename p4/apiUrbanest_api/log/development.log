@@ -1,0 +1,50 @@
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-05-15 09:16:29.609260', '2024-05-15 09:16:29.609266') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateCasas (20240515091355)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "casas" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tipo_casa" varchar, "cocina" varchar, "banio" varchar, "sala_estar" varchar, "propietario" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240515091355') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateDormitorios (20240515091508)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "dormitorios" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "descripcion" varchar, "casa_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0404884008"
+FOREIGN KEY ("casa_id")
+  REFERENCES "casas" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_dormitorios_on_casa_id" ON "dormitorios" ("casa_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240515091508') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-05-15 11:22:36 +0200
+Started GET "/casas" for ::1 at 2024-05-15 11:22:36 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#index as HTML
+Processing by Rails::WelcomeController#index as HTML
+  Rendering D:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered D:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.9ms | Allocations: 377)
+Completed 200 OK in 694ms (Views: 177.1ms | ActiveRecord: 0.0ms | Allocations: 18981)
+
+
+  [1m[36mCasa Load (0.2ms)[0m  [1m[34mSELECT "casas".* FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:4:in `index'
+Completed 200 OK in 849ms (Views: 0.9ms | ActiveRecord: 9.3ms | Allocations: 25123)
+
+
+Started GET "/casas" for ::1 at 2024-05-15 11:28:47 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#index as HTML
+  [1m[36mCasa Load (0.2ms)[0m  [1m[34mSELECT "casas".* FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 138ms (Views: -0.2ms | ActiveRecord: 10.9ms | Allocations: 10812)
+
+
+Started GET "/casas" for ::1 at 2024-05-15 11:28:49 +0200
+Processing by CasasController#index as HTML
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 2.2ms | ActiveRecord: 0.1ms | Allocations: 546)
+
+
