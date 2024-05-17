@@ -37,6 +37,12 @@ class CasasController < ApplicationController
         end
     end
 
+    def deleteAll
+        Dormitorio.delete_all
+        Casa.delete_all
+        head :ok
+    end
+
     private
     def casa_params
         params.require(:casa).permit(:tipo_casa, :cocina, :banio, :sala_estar, :propietario, dormitorios_attributes: [:id, :descripcion, :_destroy])

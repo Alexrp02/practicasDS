@@ -2750,3 +2750,59 @@ Processing by CasasController#index as HTML
 Completed 200 OK in 1ms (Views: 1.1ms | ActiveRecord: 0.1ms | Allocations: 723)
 
 
+Started DELETE "/casas" for ::1 at 2024-05-17 17:21:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#deleteAll as */*
+  [1m[36mCasa Delete All (0.4ms)[0m  [1m[31mDELETE FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:41:in `deleteAll'
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 2.8ms | Allocations: 35287)
+
+
+  
+ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed):
+  
+Started DELETE "/casas" for ::1 at 2024-05-17 17:24:34 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#deleteAll as */*
+Completed 500 Internal Server Error in 38ms (ActiveRecord: 0.0ms | Allocations: 33962)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/casas_controller.rb:41:in `deleteAll'
+Started DELETE "/casas" for ::1 at 2024-05-17 17:24:59 +0200
+Processing by CasasController#deleteAll as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 130)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/casas_controller.rb:41:in `deleteAll'
+Started DELETE "/casas" for ::1 at 2024-05-17 17:25:31 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#deleteAll as */*
+  [1m[36mDormitorio Delete All (3.9ms)[0m  [1m[31mDELETE FROM "dormitorios"[0m
+  ↳ app/controllers/casas_controller.rb:41:in `deleteAll'
+  [1m[36mCasa Delete All (0.1ms)[0m  [1m[31mDELETE FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:42:in `deleteAll'
+Completed 200 OK in 52ms (ActiveRecord: 6.8ms | Allocations: 38328)
+
+
+Started GET "/casas?propietario=Victor" for ::1 at 2024-05-17 17:25:43 +0200
+Processing by CasasController#index as */*
+  Parameters: {"propietario"=>"Victor"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Victor"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 6ms (Views: 2.0ms | ActiveRecord: 0.5ms | Allocations: 2564)
+
+
+Started GET "/casas?propietario=Victor" for 127.0.0.1 at 2024-05-17 17:25:48 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Victor"}
+  [1m[36mCasa Load (0.2ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Victor"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.1ms | Allocations: 782)
+
+
