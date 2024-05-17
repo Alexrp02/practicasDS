@@ -54,7 +54,8 @@ class Casa {
     String? descripcionSalaEstar = jsonRes['sala_estar'] as String?;
     String? propietario = jsonRes['propietario'] as String?;
     int? idRes = jsonRes['id'] as int?;
-
+    
+    print(jsonRes);
 
     List<String>? partes = descripcionCocina?.split(" ");
     CocinaEstandar cocinaEstandar = CocinaEstandar();
@@ -106,12 +107,11 @@ class Casa {
 
     return {
       'id' : id,
-      'tipoCasa' : tipo,
+      'tipo_casa' : tipo,
       'numDormitorios': dormitorios.length,
       'cocina': cocina.toString(),
       'banio': banio.toString(),
-      'salaEstar' : salaDeEstar.toString(),
-      'propietario' : propietario,
+      'sala_estar' : salaDeEstar.toString(),
       'dormitorios_attributes': jsonStringDorm
     };
   }

@@ -13,7 +13,7 @@ class CasasController < ApplicationController
     def create
         @casa = Casa.create(casa_params)
         if @casa.save
-            render json: @casa,status: :created
+            render json: @casa, include: :dormitorios, status: :created
         else
             render json: @casa.errors, status: :unprocessable_entity
         end

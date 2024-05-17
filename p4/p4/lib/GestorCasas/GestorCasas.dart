@@ -8,10 +8,13 @@ import 'package:http/http.dart' as http;
 class GestorCasas {
   List<Casa> casas = [];
   final String apiUrl = "http://localhost:3000/casas";
-  String currentUser="";
+  String currentUser = "Victor";
 
   GestorCasas(this.casas);
 
+  String getCurrentUser(){
+    return currentUser;
+  }
   void setCurrentUser(String cu){
     currentUser = cu;
   }
@@ -28,12 +31,15 @@ class GestorCasas {
   }
 
   Future<void> addCasa(Casa c) async{
+    Map<String,dynamic> casaJson = c.toJson();
+    casaJson['propietario'] = this.currentUser;
+
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(c.toJson()),
+      body: jsonEncode(casaJson),
     );
     if (response.statusCode == 201) {
       casas.add(Casa.fromJson(json.decode(response.body)));

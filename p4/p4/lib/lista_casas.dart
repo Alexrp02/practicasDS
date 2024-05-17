@@ -15,20 +15,19 @@ class ListaCasas extends StatefulWidget {
 }
 
 class _ListaCasasState extends State<ListaCasas> {
-  String currentUser = "Victor";
+  String currentUser = globals.gestorCasas.currentUser;
   List<String> users = ["Victor", "Gonzalo", "Alejandro", "Ivan"];
-  GestorCasas _gestorCasas = GestorCasas([]);
+
 
   @override
   void initState() {
     super.initState();
-    _gestorCasas.setCurrentUser(currentUser);
     _cargarCasasIniciales();
   }
 
   void _cargarCasasIniciales() async {
     try {
-      await _gestorCasas.cargarCasas();
+      await globals.gestorCasas.cargarCasas();
       setState(() {});
     } catch (e) {
       print("Error loading tasks: $e");
@@ -48,7 +47,7 @@ class _ListaCasasState extends State<ListaCasas> {
               if (newValue != null && newValue != currentUser) {
                 setState(() {
                   currentUser = newValue;
-                  _gestorCasas.setCurrentUser(currentUser);
+                  globals.gestorCasas.setCurrentUser(currentUser);
                   _cargarCasasIniciales();
                 });
               }
@@ -62,10 +61,10 @@ class _ListaCasasState extends State<ListaCasas> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _gestorCasas.casas.length,
+              itemCount: globals.gestorCasas.casas.length,
               itemBuilder: (context, index) {
                 String image = "";
-                switch (_gestorCasas.casas[index].tipo) {
+                switch (globals.gestorCasas.casas[index].tipo) {
                   case 'Apartamento':
                     image = 'assets/apartamento.jpg';
                     break;
@@ -89,7 +88,7 @@ class _ListaCasasState extends State<ListaCasas> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => VisualizarCasa(
-                            casa: _gestorCasas.casas[index],
+                            casa: globals.gestorCasas.casas[index],
                           ),
                         ),
                       );

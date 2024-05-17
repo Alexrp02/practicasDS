@@ -193,7 +193,8 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
                         side: const BorderSide(color: Colors.black, width: 3),
                       ),
                       onPressed: () {
-                        globals.casasCreadas.add(widget.casa);
+                        globals.gestorCasas.addCasa(widget.casa);
+                        print(widget.casa.toString());
                         Navigator.push(
                           context,
                           MaterialPageRoute(

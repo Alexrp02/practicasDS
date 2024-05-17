@@ -23,7 +23,8 @@ class ApartamentoBuilder extends CasaBuilder {
       throw Exception('El baño no está inicializado');
     }else{
       banio?.tipo = "Apartamento";
-      casa.banio = banio!;
+      casa.
+      banio = banio!;
     }
 
   }
