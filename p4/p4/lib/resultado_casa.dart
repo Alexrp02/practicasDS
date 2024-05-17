@@ -194,7 +194,6 @@ class _ResultadoCasaState extends State<ResultadoCasa> {
                       ),
                       onPressed: () {
                         globals.gestorCasas.addCasa(widget.casa);
-                        print(widget.casa.toString());
                         Navigator.push(
                           context,
                           MaterialPageRoute(

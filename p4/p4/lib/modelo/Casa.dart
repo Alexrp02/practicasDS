@@ -1,7 +1,4 @@
-import 'dart:html';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-
 
 import 'package:p2/modelo/Banio.dart';
 import 'package:p2/modelo/BanioConBidet.dart';
@@ -44,9 +41,11 @@ class Casa {
   }
 
   factory Casa.fromJson(Map<String, dynamic> jsonRes) {
-    Cocina ?cocina;
-    Banio ?banio;
-    List<Dormitorio> dormitorios=[];
+    Cocina? cocina;
+    Banio? banio;
+    List<Dormitorio> dormitorios = [];
+    print("Json antes de devolver");
+    print(jsonRes);
 
     String? tipo = jsonRes['tipo_casa'] as String?;
     String? descripcionCocina = jsonRes['cocina'] as String?;
@@ -54,8 +53,6 @@ class Casa {
     String? descripcionSalaEstar = jsonRes['sala_estar'] as String?;
     String? propietario = jsonRes['propietario'] as String?;
     int? idRes = jsonRes['id'] as int?;
-    
-    print(jsonRes);
 
     List<String>? partes = descripcionCocina?.split(" ");
     CocinaEstandar cocinaEstandar = CocinaEstandar();
@@ -65,7 +62,7 @@ class Casa {
     for (var i = 0; i < partes!.length; i++) {
       if (partes[i] == "lavavajillas") {
         cocina = CocinaConLavavajillas(cocina!);
-      }else if (partes[i] == "isla") {
+      } else if (partes[i] == "isla") {
         cocina = CocinaConIsla(cocina!);
       }
     }
@@ -77,55 +74,59 @@ class Casa {
     for (var i = 0; i < partes!.length; i++) {
       if (partes[i] == "bidet") {
         banio = BanioConBidet(banio!);
-      }else if (partes[i] == "jacuzzi") {
+      } else if (partes[i] == "jacuzzi") {
         banio = BanioConJacuzzi(banio!);
       }
     }
 
     SalaDeEstar salaDeEstar = SalaDeEstar(descripcionSalaEstar!);
 
-    Casa casaResultado = Casa(cocina!,banio!,salaDeEstar,dormitorios);
-
+    Casa casaResultado = Casa(cocina!, banio!, salaDeEstar, dormitorios);
 
     List<dynamic> dormitoriosJson = jsonRes['dormitorios'];
+    print(dormitoriosJson);
     dormitorios.clear();
 
-
-    dormitorios.addAll(dormitoriosJson.map((json) => Dormitorio.fromJson(json)).toList());
+    dormitorios.addAll(
+        dormitoriosJson.map((json) => Dormitorio.fromJson(json)).toList());
 
     casaResultado.setPropietario(propietario!);
     casaResultado.setTipo(tipo!);
     casaResultado.setId(idRes!);
 
-
     return casaResultado;
   }
 
   Map<String, dynamic> toJson() {
-    List<Map<String, dynamic>> dormitoriosJson = dormitorios.map((dormitorio) => dormitorio.toJson()).toList();
+    for (Dormitorio dormitorio in dormitorios) {
+      dormitorio.setId(id);
+    }
+    List<Map<String, dynamic>> dormitoriosJson =
+        dormitorios.map((dormitorio) => dormitorio.toJson()).toList();
     String jsonStringDorm = jsonEncode(dormitoriosJson);
+    print("Json dormitorios");
+    print(jsonStringDorm);
 
     return {
-      'id' : id,
-      'tipo_casa' : tipo,
+      'tipo_casa': tipo,
       'numDormitorios': dormitorios.length,
       'cocina': cocina.toString(),
       'banio': banio.toString(),
-      'sala_estar' : salaDeEstar.toString(),
-      'dormitorios_attributes': jsonStringDorm
+      'sala_estar': salaDeEstar.toString(),
+      'dormitorios_attributes': dormitoriosJson
     };
   }
 
-  void setTipo(String t){
-    tipo=t;
+  void setTipo(String t) {
+    tipo = t;
   }
 
-  void setPropietario(String p){
-    propietario=p;
+  void setPropietario(String p) {
+    propietario = p;
   }
 
-  void setId(int i){
-    id=i;
+  void setId(int i) {
+    id = i;
   }
 
   String toString() {
@@ -145,4 +146,3 @@ class Casa {
         "\n";
   }
 }
-

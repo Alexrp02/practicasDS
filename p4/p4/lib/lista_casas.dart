@@ -18,11 +18,11 @@ class _ListaCasasState extends State<ListaCasas> {
   String currentUser = globals.gestorCasas.currentUser;
   List<String> users = ["Victor", "Gonzalo", "Alejandro", "Ivan"];
 
-
   @override
   void initState() {
     super.initState();
     _cargarCasasIniciales();
+    currentUser = globals.gestorCasas.currentUser;
   }
 
   void _cargarCasasIniciales() async {

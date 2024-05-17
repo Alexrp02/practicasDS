@@ -11,25 +11,13 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-
   String currentUser = "Victor";
-  List<String> users = ["Victor", "Gonzalo", "Alejandro","Ivan"];
-  GestorCasas _gestorCasas = GestorCasas([]);
+  List<String> users = ["Victor", "Gonzalo", "Alejandro", "Ivan"];
 
   @override
   void initState() {
     super.initState();
-    _gestorCasas.setCurrentUser(currentUser);
-    _cargarCasasIniciales();
-  }
-
-  void _cargarCasasIniciales() async {
-    try {
-      await _gestorCasas.cargarCasas();
-      setState(() {});
-    } catch (e) {
-      print("Error loading tasks: $e");
-    }
+    globals.gestorCasas.setCurrentUser(currentUser);
   }
 
   @override
@@ -46,8 +34,7 @@ class _LandingPageState extends State<LandingPage> {
                 if (newValue != null && newValue != currentUser) {
                   setState(() {
                     currentUser = newValue;
-                    _gestorCasas.setCurrentUser(currentUser);
-                    _cargarCasasIniciales();
+                    globals.gestorCasas.setCurrentUser(currentUser);
                   });
                 }
               },
@@ -60,16 +47,19 @@ class _LandingPageState extends State<LandingPage> {
             ),
             Image.asset(
               "assets/logo.png",
-              fit: BoxFit.cover,
+              width: 200,
             ),
             InkWell(
               borderRadius: BorderRadius.circular(16),
               splashColor: Theme.of(context).colorScheme.primary,
               onTap: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ListaCasas()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ListaCasas()))
+                    .then((value) => setState(() {
+                          currentUser = globals.gestorCasas.currentUser;
+                        }));
               },
               child: Container(
                 width: 250,
@@ -123,5 +113,4 @@ class _LandingPageState extends State<LandingPage> {
       ),
     );
   }
-
 }

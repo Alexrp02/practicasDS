@@ -1,13 +1,12 @@
-
-class Dormitorio{
+class Dormitorio {
   int id = 0;
-  String dormitorio="";
-  
-  Dormitorio(String dor){
-    dormitorio=dor;
+  String dormitorio = "";
+
+  Dormitorio(String dor) {
+    dormitorio = dor;
   }
 
-  String toString(){
+  String toString() {
     return dormitorio;
   }
 
@@ -21,14 +20,14 @@ class Dormitorio{
     return dorm;
   }
 
-  void setId(int i){
-    id=i;
+  void setId(int i) {
+    id = i;
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id' : id,
-      'descripcion' : dormitorio,
+      'descripcion': dormitorio,
     };
   }
 }
+

@@ -1,9 +1,7 @@
-
 import 'dart:convert';
 
 import '../modelo/Casa.dart';
 import 'package:http/http.dart' as http;
-
 
 class GestorCasas {
   List<Casa> casas = [];
@@ -12,15 +10,17 @@ class GestorCasas {
 
   GestorCasas(this.casas);
 
-  String getCurrentUser(){
+  String getCurrentUser() {
     return currentUser;
   }
-  void setCurrentUser(String cu){
+
+  void setCurrentUser(String cu) {
     currentUser = cu;
   }
 
-  Future<void> cargarCasas() async{
-    final response = await http.get(Uri.parse('$apiUrl?propietario=$currentUser'));
+  Future<void> cargarCasas() async {
+    final response =
+        await http.get(Uri.parse('$apiUrl?propietario=$currentUser'));
     if (response.statusCode == 200) {
       List<dynamic> casasJson = json.decode(response.body);
       casas.clear();
@@ -30,8 +30,11 @@ class GestorCasas {
     }
   }
 
-  Future<void> addCasa(Casa c) async{
-    Map<String,dynamic> casaJson = c.toJson();
+  Future<void> addCasa(Casa c) async {
+    Map<String, dynamic> casaJson = c.toJson();
+    print(casaJson);
+    print("jsonEncode(casaJson):");
+    print(jsonEncode(casaJson));
     casaJson['propietario'] = this.currentUser;
 
     final response = await http.post(
@@ -42,6 +45,9 @@ class GestorCasas {
       body: jsonEncode(casaJson),
     );
     if (response.statusCode == 201) {
+      print("respuesta:");
+      print(response.body);
+      print(Casa.fromJson(json.decode(response.body)));
       casas.add(Casa.fromJson(json.decode(response.body)));
     } else {
       throw Exception('Failed to add task: ${response.body}');
@@ -60,7 +66,6 @@ class GestorCasas {
   }
 
   Future<void> updateCasa(Casa c) async {
-
     final response = await http.patch(
       Uri.parse('$apiUrl/${c.id}'),
       headers: <String, String>{
@@ -70,9 +75,9 @@ class GestorCasas {
     );
 
     if (response.statusCode == 200) {
-
     } else {
       throw Exception('Failed to update task');
     }
   }
 }
+
