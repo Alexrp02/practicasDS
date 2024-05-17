@@ -85,8 +85,11 @@ class Casa {
 
     Casa casaResultado = Casa(cocina!,banio!,salaDeEstar,dormitorios);
 
-    List<dynamic> dormitoriosJson = json.decode(jsonRes['dormitorios']);
+
+    List<dynamic> dormitoriosJson = jsonRes['dormitorios'];
     dormitorios.clear();
+
+
     dormitorios.addAll(dormitoriosJson.map((json) => Dormitorio.fromJson(json)).toList());
 
     casaResultado.setPropietario(propietario!);

@@ -8,12 +8,16 @@ import 'package:http/http.dart' as http;
 class GestorCasas {
   List<Casa> casas = [];
   final String apiUrl = "http://localhost:3000/casas";
+  String currentUser="";
 
   GestorCasas(this.casas);
 
+  void setCurrentUser(String cu){
+    currentUser = cu;
+  }
 
-  Future<void> cargarCasas(String propietario) async{
-    final response = await http.get(Uri.parse('$apiUrl?propietario=$propietario'));
+  Future<void> cargarCasas() async{
+    final response = await http.get(Uri.parse('$apiUrl?propietario=$currentUser'));
     if (response.statusCode == 200) {
       List<dynamic> casasJson = json.decode(response.body);
       casas.clear();

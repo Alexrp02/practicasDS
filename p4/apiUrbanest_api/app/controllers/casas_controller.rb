@@ -1,7 +1,7 @@
 class CasasController < ApplicationController
     def index 
-        #@casas = Casa.where(propietario:params[:propietario])
-        @casas = Casa.all
+        @casas = Casa.where(propietario:params[:propietario])
+        #@casas = Casa.all
         render json: @casas, include: :dormitorios
     end
 

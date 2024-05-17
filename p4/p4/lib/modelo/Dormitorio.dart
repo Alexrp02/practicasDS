@@ -12,7 +12,7 @@ class Dormitorio{
   }
 
   factory Dormitorio.fromJson(Map<String, dynamic> jsonRes) {
-    String des = jsonRes['tipo_casa'] as String;
+    String des = jsonRes['descripcion'] as String;
     int idRes = jsonRes['id'] as int;
 
     Dormitorio dorm = Dormitorio(des);
