@@ -2,8 +2,13 @@ class CasasController < ApplicationController
     def index 
         #@casas = Casa.where(propietario:params[:propietario])
         @casas = Casa.all
-        render json: @casas
+        render json: @casas, include: :dormitorios
     end
+
+    def show
+        @casa = Casa.find(params[:id])
+        render json: @casa, include: :dormitorios
+      end
 
     def create
         @casa = Casa.create(casa_params)

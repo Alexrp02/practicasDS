@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   Rails.application.routes.draw do
-    resources :casas, only: [:index, :create, :update, :destroy]
+    resources :casas, only: [:index, :show, :create, :update, :destroy]
   end
 end
