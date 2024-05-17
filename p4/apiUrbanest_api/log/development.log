@@ -187,3 +187,14 @@ Processing by CasasController#show as */*
 Completed 200 OK in 282ms (Views: 89.1ms | ActiveRecord: 7.2ms | Allocations: 25474)
 
 
+Started GET "/casas" for ::1 at 2024-05-17 09:57:57 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#index as */*
+  Parameters: {"casa"=>{"tipo_casa"=>"Chalet", "cocina"=>"Moderna", "banio"=>"2", "sala_estar"=>"Grande", "propietario"=>"Juan Perez", "dormitorios_attributes"=>[{"descripcion"=>"Dormitorio principal"}, {"descripcion"=>"Dormitorio de invitados"}]}}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas"[0m
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.2ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 2]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 231ms (Views: 183.0ms | ActiveRecord: 5.4ms | Allocations: 25448)
+
+
