@@ -5,6 +5,7 @@ import 'package:p2/modelo/globals.dart' as globals;
 import 'package:p2/visualizar_casa.dart';
 
 import 'GestorCasas/GestorCasas.dart';
+import 'modelo/Casa.dart';
 import 'resultado_casa.dart';
 
 class ListaCasas extends StatefulWidget {
@@ -32,6 +33,28 @@ class _ListaCasasState extends State<ListaCasas> {
     } catch (e) {
       print("Error loading tasks: $e");
     }
+  }
+
+  void _borrarCasa(Casa c) {
+    setState(() {
+      globals.gestorCasas.eliminar(c);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const ListaCasas()));
+    });
+  }
+
+  void _editarCasa(int index) {
+    // Lógica para editar la casa
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VisualizarCasa(
+          casa: globals.gestorCasas.casas[index],
+        ),
+      ),
+    );
   }
 
   @override
@@ -80,19 +103,34 @@ class _ListaCasasState extends State<ListaCasas> {
                 }
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: CustomButton(
-                    text: "Casa ${index + 1}",
-                    image: image,
-                    onPressed: (String value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VisualizarCasa(
-                            casa: globals.gestorCasas.casas[index],
+                  child: Card(
+                    child: ListTile(
+                      leading: Image.asset(image),
+                      title: Text("Casa ${index + 1}"),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () => _editarCasa(index),
                           ),
-                        ),
-                      );
-                    },
+                          IconButton(
+                            icon: Icon(Icons.delete),
+                            onPressed: () => _borrarCasa(globals.gestorCasas.casas[index]),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VisualizarCasa(
+                              casa: globals.gestorCasas.casas[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
               },
@@ -103,97 +141,3 @@ class _ListaCasasState extends State<ListaCasas> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*import 'package:flutter/material.dart';
-import 'package:p2/componentes/button.dart';
-import 'package:p2/componentes/header.dart';
-import 'package:p2/modelo/globals.dart' as globals;
-import 'package:p2/visualizar_casa.dart';
-
-import 'GestorCasas/GestorCasas.dart';
-import 'resultado_casa.dart';
-
-class ListaCasas extends StatefulWidget {
-  const ListaCasas({super.key});
-
-  @override
-  _ListaCasasState createState() => _ListaCasasState();
-}
-
-class _ListaCasasState extends State<ListaCasas> {
-  String currentUser = "Victor";
-  List<String> users = ["Victor", "Gonzalo", "Alejandro","Ivan"];
-  GestorCasas _gestorCasas = GestorCasas([]);
-
-  @override
-  void initState() {
-    _gestorCasas.setCurrentUser(currentUser);
-    _cargarCasasIniciales();
-  }
-
-  void _cargarCasasIniciales() async {
-    try {
-      await _gestorCasas.cargarCasas();
-      setState(() {});
-    } catch (e) {
-      print("Error loading tasks: $e");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const Header(),
-      body: ListView.builder(
-        itemCount: globals.casasCreadas.length,
-        itemBuilder: (context, index) {
-          String image = "";
-          switch (globals.casasCreadas[index].tipo) {
-            case 'Apartamento':
-              image = 'assets/apartamento.jpg';
-              break;
-            case 'Chalet':
-              image = 'assets/chalet.jpg';
-              break;
-            case 'Casa de Campo':
-              image = 'assets/campestre.jpg';
-              break;
-            default:
-              image = 'assets/apartamento.jpg';
-              break;
-          }
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: CustomButton(
-              text: "Casa ${index + 1}",
-              image: image,
-              onPressed: (String value) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => VisualizarCasa(
-                            casa: globals.casasCreadas[index],
-                          )),
-                );
-              },
-            ),
-          );
-        },
-      ),
-    );
-  }
-}*/
