@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p2/cocina_update.dart';
 import 'package:p2/componentes/header.dart';
 import 'package:p2/modelo/BanioConBidet.dart';
 import 'package:p2/modelo/BanioConJacuzzi.dart';
@@ -8,19 +9,39 @@ import 'package:p2/modelo/CasaBuilder.dart';
 import 'cocina_seleccion.dart';
 import 'componentes/button.dart';
 import 'modelo/Banio.dart';
+import 'modelo/Casa.dart';
 
-class BanioSeleccion extends StatefulWidget {
-  final CasaBuilder casaBuilder;
-  const BanioSeleccion({
+class BanioUpdate extends StatefulWidget {
+  final Casa casa;
+  const BanioUpdate({
     super.key,
-    required this.casaBuilder,
+    required this.casa,
   });
 
   @override
-  _BanioSeleccionState createState() => _BanioSeleccionState();
+  _BanioUpdateState createState() => _BanioUpdateState();
 }
 
-class _BanioSeleccionState extends State<BanioSeleccion> {
+class _BanioUpdateState extends State<BanioUpdate> {
+
+  @override
+  void initState() {
+    super.initState();
+    // Configurar el estado inicial basado en las características de la casa
+    String banio = widget.casa.banio.toString();
+    List<String> partes = banio.split(" ");
+
+
+    for (var i = 0; i < partes.length; i++) {
+      if (partes[i] == "jacuzzi") {
+        _seleccion_decoradores["Jacuzzi"] = true;
+      } else if (partes[i] == "bidet") {
+        _seleccion_decoradores["Bidet"] = true;
+
+      }
+    }
+  }
+
   final Map<String, bool> _seleccion_decoradores = {
     "Jacuzzi": false,
     "Bidet": false,
@@ -46,7 +67,7 @@ class _BanioSeleccionState extends State<BanioSeleccion> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("¿Quieres añadirle algo a los baños?",
+                  Text("¿Quieres modificar algo a los baños?",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ],
@@ -107,22 +128,22 @@ class _BanioSeleccionState extends State<BanioSeleccion> {
                   if(_seleccion_decoradores["Bidet"] == true && _seleccion_decoradores["Jacuzzi"] == true){
                     BanioConBidet bidet = BanioConBidet(banio);
                     BanioConJacuzzi jacuzzi = BanioConJacuzzi(bidet);
-                    widget.casaBuilder.banio = jacuzzi;
+                    widget.casa.banio = jacuzzi;
                   }else if(_seleccion_decoradores["Bidet"] == true){
                     BanioConBidet bidet = BanioConBidet(banio);
-                    widget.casaBuilder.banio = bidet;
+                    widget.casa.banio = bidet;
                   }else if(_seleccion_decoradores["Jacuzzi"] == true){
                     BanioConJacuzzi jacuzzi = BanioConJacuzzi(banio);
-                    widget.casaBuilder.banio = jacuzzi;
+                    widget.casa.banio = jacuzzi;
                   }else{
-                    widget.casaBuilder.banio = banio;
+                    widget.casa.banio = banio;
                   }
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          CocinaSeleccion(casaBuilder: widget.casaBuilder),
+                          CocinaUpdate(casa: widget.casa),
                     ),
                   );
                 },

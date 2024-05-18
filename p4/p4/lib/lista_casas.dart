@@ -5,6 +5,7 @@ import 'package:p2/modelo/globals.dart' as globals;
 import 'package:p2/visualizar_casa.dart';
 
 import 'GestorCasas/GestorCasas.dart';
+import 'banio_update.dart';
 import 'modelo/Casa.dart';
 import 'resultado_casa.dart';
 
@@ -45,13 +46,13 @@ class _ListaCasasState extends State<ListaCasas> {
     });
   }
 
-  void _editarCasa(int index) {
+  void _editarCasa(Casa c) {
     // Lógica para editar la casa
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => VisualizarCasa(
-          casa: globals.gestorCasas.casas[index],
+        builder: (context) => BanioUpdate(
+          casa: c,
         ),
       ),
     );
@@ -112,7 +113,7 @@ class _ListaCasasState extends State<ListaCasas> {
                         children: [
                           IconButton(
                             icon: Icon(Icons.edit),
-                            onPressed: () => _editarCasa(index),
+                            onPressed: () => _editarCasa(globals.gestorCasas.casas[index]),
                           ),
                           IconButton(
                             icon: Icon(Icons.delete),

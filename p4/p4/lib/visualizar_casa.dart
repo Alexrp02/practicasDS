@@ -152,7 +152,7 @@ class _VisualizarCasaState extends State<VisualizarCasa> {
             SizedBox(height: 20),
             Center(
               child: Text(
-                "Así quedaría tu casa de ensueño",
+                "Así es tu casa de ensueño",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),

@@ -5,29 +5,50 @@ import 'package:p2/modelo/CocinaConIsla.dart';
 import 'package:p2/modelo/CocinaConLavavajillas.dart';
 import 'package:p2/modelo/CocinaEstandar.dart';
 import 'package:p2/modelo/DirectorCasa.dart';
+import 'package:p2/modelo/globals.dart' as globals;
 import 'package:p2/resultado_casa.dart';
+import 'package:p2/visualizar_casa.dart';
+import 'package:p2/visualizar_casa_update.dart';
 
 import 'componentes/button.dart';
 import 'modelo/Banio.dart';
 import 'modelo/Casa.dart';
 import 'modelo/Cocina.dart';
 
-class CocinaSeleccion extends StatefulWidget {
-  final CasaBuilder casaBuilder;
-  const CocinaSeleccion({
+class CocinaUpdate extends StatefulWidget {
+  final Casa casa;
+  const CocinaUpdate({
     super.key,
-    required this.casaBuilder,
+    required this.casa,
   });
 
   @override
-  _CocinaSeleccionState createState() => _CocinaSeleccionState();
+  _CocinaUpdateState createState() => _CocinaUpdateState();
 }
 
-class _CocinaSeleccionState extends State<CocinaSeleccion> {
+class _CocinaUpdateState extends State<CocinaUpdate> {
   final Map<String, bool> _seleccion_decoradores = {
     "Isla": false,
     "Lavavajillas": false,
   };
+
+  @override
+  void initState() {
+    super.initState();
+    // Configurar el estado inicial basado en las características de la casa
+    String cocina = widget.casa.cocina.toString();
+    List<String> partes = cocina.split(" ");
+    print(cocina+"\n");
+
+    for (var i = 0; i < partes.length; i++) {
+      if (partes[i] == "isla") {
+        _seleccion_decoradores["Isla"] = true;
+      } else if (partes[i] == "lavavajillas") {
+        _seleccion_decoradores["Lavavajillas"] = true;
+
+      }
+    }
+  }
 
   void _seleccionarDecorador(String decorador) {
     setState(() {
@@ -49,9 +70,9 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("¿Quieres añadirle algo a la cocina?",
+                  Text("¿Quieres modificar algo a la cocina?",
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -67,7 +88,7 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                       decoration: BoxDecoration(
                           border: _seleccion_decoradores["Isla"]!
                               ? Border.all(
-                                  width: 2, color: const Color(0xfff3b46a))
+                              width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
@@ -80,7 +101,7 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                       decoration: BoxDecoration(
                           border: _seleccion_decoradores["Lavavajillas"]!
                               ? Border.all(
-                                  width: 2, color: const Color(0xfff3b46a))
+                              width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
@@ -110,26 +131,27 @@ class _CocinaSeleccionState extends State<CocinaSeleccion> {
                   if(_seleccion_decoradores["Lavavajillas"] == true && _seleccion_decoradores["Isla"] == true){
                     CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
                     CocinaConIsla isla = CocinaConIsla(lavavajillas);
-                    widget.casaBuilder.cocina = isla;
+                    widget.casa.cocina = isla;
                   }else if(_seleccion_decoradores["Isla"] == true){
                     CocinaConIsla isla = CocinaConIsla(cocina);
-                    widget.casaBuilder.cocina = isla;
+                    widget.casa.cocina = isla;
                   }else if(_seleccion_decoradores["Lavavajillas"] == true){
                     CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
-                    widget.casaBuilder.cocina = lavavajillas;
+                    widget.casa.cocina = lavavajillas;
                   }else{
-                    widget.casaBuilder.cocina = cocina;
+                    widget.casa.cocina = cocina;
                   }
 
-                  DirectorCasa directorCasa = DirectorCasa(widget.casaBuilder);
-                  directorCasa.construirCasa();
-                  Casa casaCreada = directorCasa.builder.casa;
+
+                  globals.gestorCasas.updateCasa(widget.casa);
+
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          ResultadoCasa(casa: casaCreada),
+                      builder: (context) => VisualizarCasaUpdate(
+                        casa: widget.casa,
+                      ),
                     ),
                   );
                 },

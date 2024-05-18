@@ -13,6 +13,7 @@ import 'package:p2/pantalla_final.dart';
 import 'package:p2/seleccion_tipo.dart';
 
 import 'componentes/header.dart';
+import 'lista_casas.dart';
 import 'modelo/ApartamentoBuilder.dart';
 import 'modelo/Banio.dart';
 import 'modelo/Casa.dart';
@@ -61,15 +62,15 @@ class ItemListaFinal extends StatelessWidget {
   }
 }
 
-class VisualizarCasa extends StatefulWidget {
+class VisualizarCasaUpdate extends StatefulWidget {
   final Casa casa;
 
-  VisualizarCasa({super.key, required this.casa});
+  VisualizarCasaUpdate({super.key, required this.casa});
   @override
-  _VisualizarCasaState createState() => _VisualizarCasaState();
+  _VisualizarCasaUpdateState createState() => _VisualizarCasaUpdateState();
 }
 
-class _VisualizarCasaState extends State<VisualizarCasa> {
+class _VisualizarCasaUpdateState extends State<VisualizarCasaUpdate> {
   List<String> banioImg = [];
   List<String> cocinaImg = [];
   List<String> dormitoriosImg = [];
@@ -193,7 +194,10 @@ class _VisualizarCasaState extends State<VisualizarCasa> {
                         side: const BorderSide(color: Colors.black, width: 3),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ListaCasas()));
                       },
                       child: const Text(
                         "Volver",
