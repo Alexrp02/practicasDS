@@ -71,7 +71,7 @@ class GestorCasas {
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(c.toJson()),
+      body: jsonEncode(c.toJsonUpdate()),
     );
 
     if (response.statusCode == 200) {

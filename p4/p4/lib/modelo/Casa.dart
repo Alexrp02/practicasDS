@@ -117,6 +117,13 @@ class Casa {
     };
   }
 
+  Map<String, dynamic> toJsonUpdate() {
+    return {
+      'cocina': cocina.toString(),
+      'banio': banio.toString(),
+    };
+  }
+
   void setTipo(String t) {
     tipo = t;
   }
