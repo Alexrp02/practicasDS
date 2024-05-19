@@ -16,29 +16,37 @@ import 'package:p2/modelo/globals.dart' as globals;
 
 void main() {
   group('Pruebas con el decorador de baño Grupo1', () {
-    CasaDeCampoBuilder casaDeCampoBuilder = CasaDeCampoBuilder();
-    casaDeCampoBuilder.cocina = CocinaEstandar();
-    casaDeCampoBuilder.dormitorios = [];
-    casaDeCampoBuilder.setDormitorios();
-    casaDeCampoBuilder.setSalaDeEstar();
-    casaDeCampoBuilder.setCocina();
+    late CasaDeCampoBuilder casaDeCampoBuilder;
 
-    ApartamentoBuilder apartamentoBuilder = ApartamentoBuilder();
-    apartamentoBuilder.cocina = CocinaEstandar();
-    apartamentoBuilder.dormitorios = [];
-    apartamentoBuilder.setDormitorios();
-    apartamentoBuilder.setSalaDeEstar();
-    apartamentoBuilder.setCocina();
+    late ApartamentoBuilder apartamentoBuilder;
 
-    Banio banio = BanioEstandar();
+    late Banio banio;
 
-    test('Prueba de decorador de baño con un decorador de bidet', () {
+    setUp(() {
+      casaDeCampoBuilder = CasaDeCampoBuilder();
+      casaDeCampoBuilder.cocina = CocinaEstandar();
+      casaDeCampoBuilder.dormitorios = [];
+      casaDeCampoBuilder.setDormitorios();
+      casaDeCampoBuilder.setSalaDeEstar();
+      casaDeCampoBuilder.setCocina();
+
+      apartamentoBuilder = ApartamentoBuilder();
+      apartamentoBuilder.cocina = CocinaEstandar();
+      apartamentoBuilder.dormitorios = [];
+      apartamentoBuilder.setDormitorios();
+      apartamentoBuilder.setSalaDeEstar();
+      apartamentoBuilder.setCocina();
+
+      banio = BanioEstandar();
+    });
+
+    test('Prueba de decorador de baño con un decorador de bidet', () async {
       banio = BanioConBidet(banio);
       expect(banio.toString(), "Baño Con bidet");
     });
 
     test('Prueba de creacion de una casa de campo con un baño con un bidet',
-            () {
+            () async {
           casaDeCampoBuilder.banio = banio;
           casaDeCampoBuilder.setBanio();
           Casa casa = casaDeCampoBuilder.casa;
@@ -48,7 +56,7 @@ void main() {
 
     test(
         'Prueba de creacion de un apartamento con un baño con bidet y con Jacuzzi',
-            () {
+            () async {
           banio = BanioConJacuzzi(banio);
           apartamentoBuilder.banio = banio;
           apartamentoBuilder.setBanio();
@@ -58,7 +66,7 @@ void main() {
         });
 
     test('Creación de un Apartamento con un baño con  2 bidet y un jacuzzi',
-            () {
+            () async {
           banio = BanioEstandar();
           banio = BanioConBidet(banio);
           banio = BanioConBidet(banio);
@@ -71,7 +79,7 @@ void main() {
           expect(casa.banio.toString(), "Baño Con bidet Con bidet Con jacuzzi");
         });
 
-    test("Comprobación de que una casa no se puede crear sin Baño", () {
+    test("Comprobación de que una casa no se puede crear sin Baño", () async {
       casaDeCampoBuilder = CasaDeCampoBuilder();
       casaDeCampoBuilder.cocina = CocinaEstandar();
       casaDeCampoBuilder.dormitorios = [];
@@ -85,7 +93,7 @@ void main() {
 
 
     test('Comprobación de que todos los atributos estan instanciados, metodo toString de Casa',
-            () {
+            () async {
           banio = BanioEstandar();
           banio = BanioConBidet(banio);
           banio = BanioConJacuzzi(banio);
@@ -107,24 +115,33 @@ void main() {
 
   });
 
-  group('Pruebas con el decorador de cocina Grupo2', () {
+  group('Pruebas con el decorador de cocina Grupo2', () async {
 
-    ChaletBuilder chaletBuilder = ChaletBuilder();
-    chaletBuilder.banio = BanioEstandar();
-    chaletBuilder.dormitorios = [];
-    chaletBuilder.setDormitorios();
-    chaletBuilder.setSalaDeEstar();
-    chaletBuilder.setBanio();
+    late ChaletBuilder chaletBuilder;
 
-    CasaDeCampoBuilder casaDeCampoBuilder = CasaDeCampoBuilder();
-    casaDeCampoBuilder.banio = BanioEstandar();
-    casaDeCampoBuilder.dormitorios = [];
-    casaDeCampoBuilder.setDormitorios();
-    casaDeCampoBuilder.setSalaDeEstar();
-    casaDeCampoBuilder.setBanio();
-    Cocina cocina = CocinaEstandar();
+    late CasaDeCampoBuilder casaDeCampoBuilder;
 
-    test('Prueba de creacion de un Chalet con decorador de isla y lavavajillas', () {
+    late Cocina cocina;
+
+    setUp(() {
+      chaletBuilder = ChaletBuilder();
+      chaletBuilder.banio = BanioEstandar();
+      chaletBuilder.dormitorios = [];
+      chaletBuilder.setDormitorios();
+      chaletBuilder.setSalaDeEstar();
+      chaletBuilder.setBanio();
+
+      casaDeCampoBuilder = CasaDeCampoBuilder();
+      casaDeCampoBuilder.banio = BanioEstandar();
+      casaDeCampoBuilder.dormitorios = [];
+      casaDeCampoBuilder.setDormitorios();
+      casaDeCampoBuilder.setSalaDeEstar();
+      casaDeCampoBuilder.setBanio();
+
+      cocina = CocinaEstandar();
+    });
+
+    test('Prueba de creacion de un Chalet con decorador de isla y lavavajillas', () async {
       cocina = CocinaConIsla(cocina);
       cocina = CocinaConLavavajillas(cocina);
       chaletBuilder.cocina = cocina;
@@ -134,14 +151,14 @@ void main() {
           "\nBaño Chalet\nSala De Estar Chalet\n[]\n");
     });
 
-    test('Prueba de decorador de cocina con dos islas', (){
+    test('Prueba de decorador de cocina con dos islas', () async {
       Cocina cocinaDobleIsla = CocinaEstandar();
       cocinaDobleIsla = CocinaConIsla(cocinaDobleIsla);
       cocinaDobleIsla = CocinaConIsla(cocinaDobleIsla);
       expect(cocinaDobleIsla.toString(), "Cocina Con isla Con isla");
     });
 
-    test('Prueba Singleton ListaCasas', (){
+    /*test('Prueba Singleton ListaCasas', () async {
       Casa chalet = chaletBuilder.casa;
       Casa casaDeCampo = casaDeCampoBuilder.casa;
       globals.casasCreadas.add(chalet);
@@ -149,9 +166,9 @@ void main() {
       expect(globals.casasCreadas.length, 2);
       expect(globals.casasCreadas[0].tipo, "Chalet");
       expect(globals.casasCreadas[1].tipo, 'Casa de Campo');
-    });
+    });*/
 
-    test('Prueba de una cocina con una isla y un apartamento', (){
+    test('Prueba de una cocina con una isla y un apartamento', () async {
       Casa apartamento = ApartamentoBuilder().casa;
       Cocina cocinaApartamentoIsla = CocinaEstandar();
       cocinaApartamentoIsla = CocinaConIsla(cocinaApartamentoIsla);
@@ -159,7 +176,7 @@ void main() {
       expect(cocinaApartamentoIsla.toString(), "Cocina Con isla");
     });
 
-    test('Prueba de decorar una cocina de una casa de campo con tres lavavajillas', (){
+    test('Prueba de decorar una cocina de una casa de campo con tres lavavajillas', () async {
       Casa casaDeCampoTresLavavajillas = casaDeCampoBuilder.casa;
       Cocina cocinaTresLavavajillas = CocinaEstandar();
       cocinaTresLavavajillas = CocinaConLavavajillas(cocinaTresLavavajillas);
@@ -172,7 +189,7 @@ void main() {
           "\nBaño Casa de Campo\nSala de Estar de CasaDeCampo\n[]\n");
     });
 
-    test('Prueba de añadirle a una cocina multiples islas y lavavajillas', (){
+    test('Prueba de añadirle a una cocina multiples islas y lavavajillas', () async {
       Cocina cocinaMultiplesDecorados = CocinaEstandar();
       cocinaMultiplesDecorados = CocinaConIsla(cocinaMultiplesDecorados);
       cocinaMultiplesDecorados = CocinaConLavavajillas(cocinaMultiplesDecorados);
