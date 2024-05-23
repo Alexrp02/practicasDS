@@ -3773,3 +3773,412 @@ Processing by CasasController#index as */*
 Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.3ms | Allocations: 1374)
 
 
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 45ms (Views: 1.7ms | ActiveRecord: 1.8ms | Allocations: 36882)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.3ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:13:27.650215"], ["updated_at", "2024-05-23 22:13:27.650215"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 44]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 102ms (Views: 5.8ms | ActiveRecord: 6.4ms | Allocations: 120888)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 44]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.1ms | Allocations: 1782)
+
+
+Started DELETE "/casas/44" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"44"}
+  [1m[36mCasa Load (0.2ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 44], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (1.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 44]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 44]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 6ms (ActiveRecord: 1.4ms | Allocations: 3329)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms | Allocations: 738)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:27 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:33 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:13:34 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.3ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:13:34.006154"], ["updated_at", "2024-05-23 22:13:34.006154"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 45]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 8ms (Views: 1.9ms | ActiveRecord: 1.7ms | Allocations: 3152)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:34 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 45]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms | Allocations: 1623)
+
+
+Started DELETE "/casas/45" for 127.0.0.1 at 2024-05-24 00:13:34 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (0.9ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 45]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 45]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 6ms (ActiveRecord: 1.3ms | Allocations: 2939)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:34 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:13:34 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:14:54 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:14:54 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.3ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:14:54.824796"], ["updated_at", "2024-05-23 22:14:54.824796"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 46]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 6ms (Views: 1.6ms | ActiveRecord: 1.5ms | Allocations: 3089)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:20:15 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 46]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started DELETE "/casas/46" for 127.0.0.1 at 2024-05-24 00:20:15 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"46"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 46], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (1.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 46]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 46]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 5ms (ActiveRecord: 1.3ms | Allocations: 2935)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:21:14 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:21:14 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.5ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:21:14.289305"], ["updated_at", "2024-05-23 22:21:14.289305"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 47]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 6ms (Views: 1.6ms | ActiveRecord: 1.7ms | Allocations: 3083)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:21:14 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 47]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.2ms | Allocations: 1623)
+
+
+Started PATCH "/casas/47" for 127.0.0.1 at 2024-05-24 00:21:14 +0200
+Processing by CasasController#update as HTML
+  Parameters: {"cocina"=>"Cocina", "banio"=>"Baño", "id"=>"47", "casa"=>{"cocina"=>"Cocina", "banio"=>"Baño"}}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 47], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:23:in `update'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 877)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:21:14 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 47]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:23:30 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 47]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms | Allocations: 1623)
+
+
+Started DELETE "/casas/47" for 127.0.0.1 at 2024-05-24 00:23:30 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"47"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 47], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (0.9ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 47]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 47]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 6ms (ActiveRecord: 1.3ms | Allocations: 2933)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:24:07 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.8ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:24:07 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.4ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:24:07.541870"], ["updated_at", "2024-05-23 22:24:07.541870"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 48]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 6ms (Views: 1.5ms | ActiveRecord: 1.6ms | Allocations: 3087)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:24:07 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 48]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started PATCH "/casas/48" for 127.0.0.1 at 2024-05-24 00:24:07 +0200
+Processing by CasasController#update as HTML
+  Parameters: {"cocina"=>"Cocina", "banio"=>"Baño", "id"=>"48", "casa"=>{"cocina"=>"Cocina", "banio"=>"Baño"}}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 48], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:23:in `update'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 850)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:24:07 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 48]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:26:09 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 48]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.1ms | ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started DELETE "/casas/48" for 127.0.0.1 at 2024-05-24 00:26:09 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"48"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 48], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (0.9ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 48]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 48]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 5ms (ActiveRecord: 1.3ms | Allocations: 2931)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.1ms | Allocations: 724)
+
+
+Started POST "/casas" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#create as HTML
+  Parameters: {"tipo_casa"=>"Casa estándar", "numDormitorios"=>0, "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "dormitorios_attributes"=>[], "propietario"=>"Prueba test", "casa"=>{"tipo_casa"=>"Casa estándar", "cocina"=>"Cocina", "banio"=>"Baño", "sala_estar"=>"Sala de Estar estándar", "propietario"=>"Prueba test", "dormitorios_attributes"=>[]}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mCasa Create (1.3ms)[0m  [1m[32mINSERT INTO "casas" ("tipo_casa", "cocina", "banio", "sala_estar", "propietario", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["tipo_casa", "Casa estándar"], ["cocina", "Cocina"], ["banio", "Baño"], ["sala_estar", "Sala de Estar estándar"], ["propietario", "Prueba test"], ["created_at", "2024-05-23 22:26:42.177333"], ["updated_at", "2024-05-23 22:26:42.177333"]]
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:14:in `create'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 49]]
+  ↳ app/controllers/casas_controller.rb:16:in `create'
+Completed 201 Created in 6ms (Views: 1.6ms | ActiveRecord: 1.5ms | Allocations: 3083)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 49]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.2ms | Allocations: 1623)
+
+
+Started PATCH "/casas/49" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#update as HTML
+  Parameters: {"cocina"=>"Cocina", "banio"=>"Baño Con bidet", "id"=>"49", "casa"=>{"cocina"=>"Cocina", "banio"=>"Baño Con bidet"}}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:23:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:24:in `update'
+  [1m[36mCasa Update (1.0ms)[0m  [1m[33mUPDATE "casas" SET "banio" = ?, "updated_at" = ? WHERE "casas"."id" = ?[0m  [["banio", "Baño Con bidet"], ["updated_at", "2024-05-23 22:26:42.228136"], ["id", 49]]
+  ↳ app/controllers/casas_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:24:in `update'
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 1.3ms | Allocations: 2768)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+  [1m[36mDormitorio Load (0.1ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 49]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.2ms | Allocations: 1623)
+
+
+Started DELETE "/casas/49" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#destroy as HTML
+  Parameters: {"id"=>"49"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."id" = ? LIMIT ?[0m  [["id", 49], ["LIMIT", 1]]
+  ↳ app/controllers/casas_controller.rb:32:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mDormitorio Load (1.0ms)[0m  [1m[34mSELECT "dormitorios".* FROM "dormitorios" WHERE "dormitorios"."casa_id" = ?[0m  [["casa_id", 49]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mCasa Destroy (0.1ms)[0m  [1m[31mDELETE FROM "casas" WHERE "casas"."id" = ?[0m  [["id", 49]]
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/casas_controller.rb:33:in `destroy'
+Completed 200 OK in 6ms (ActiveRecord: 1.3ms | Allocations: 2931)
+
+
+Started GET "/casas?propietario=Prueba%20test" for 127.0.0.1 at 2024-05-24 00:26:42 +0200
+Processing by CasasController#index as HTML
+  Parameters: {"propietario"=>"Prueba test"}
+  [1m[36mCasa Load (0.1ms)[0m  [1m[34mSELECT "casas".* FROM "casas" WHERE "casas"."propietario" = ?[0m  [["propietario", "Prueba test"]]
+  ↳ app/controllers/casas_controller.rb:5:in `index'
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.1ms | Allocations: 725)
+
+
