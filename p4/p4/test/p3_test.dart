@@ -47,6 +47,7 @@ void main() {
 
     test('Prueba de creacion de una casa de campo con un baño con un bidet',
             () async {
+          banio = BanioConBidet(banio);
           casaDeCampoBuilder.banio = banio;
           casaDeCampoBuilder.setBanio();
           Casa casa = casaDeCampoBuilder.casa;
@@ -58,10 +59,11 @@ void main() {
         'Prueba de creacion de un apartamento con un baño con bidet y con Jacuzzi',
             () async {
           banio = BanioConJacuzzi(banio);
+          banio = BanioConBidet(banio);
           apartamentoBuilder.banio = banio;
           apartamentoBuilder.setBanio();
           Casa casa = apartamentoBuilder.casa;
-          expect(casa.banio.toString(), "Baño Con bidet Con jacuzzi");
+          expect(casa.banio.toString(), "Baño Con jacuzzi Con bidet");
           expect(casa.banio.tipo, "Apartamento");
         });
 
@@ -115,7 +117,7 @@ void main() {
 
   });
 
-  group('Pruebas con el decorador de cocina Grupo2', () async {
+  group('Pruebas con el decorador de cocina Grupo2', () {
 
     late ChaletBuilder chaletBuilder;
 
@@ -158,15 +160,15 @@ void main() {
       expect(cocinaDobleIsla.toString(), "Cocina Con isla Con isla");
     });
 
-    /*test('Prueba Singleton ListaCasas', () async {
+    test('Prueba ListaCasas', () async {
       Casa chalet = chaletBuilder.casa;
       Casa casaDeCampo = casaDeCampoBuilder.casa;
-      globals.casasCreadas.add(chalet);
-      globals.casasCreadas.add(casaDeCampo);
-      expect(globals.casasCreadas.length, 2);
-      expect(globals.casasCreadas[0].tipo, "Chalet");
-      expect(globals.casasCreadas[1].tipo, 'Casa de Campo');
-    });*/
+      globals.gestorCasas.casas.add(chalet);
+      globals.gestorCasas.casas.add(casaDeCampo);
+      expect(globals.gestorCasas.casas.length, 2);
+      expect(globals.gestorCasas.casas[0].tipo, "Chalet");
+      expect(globals.gestorCasas.casas[1].tipo, 'Casa de Campo');
+    });
 
     test('Prueba de una cocina con una isla y un apartamento', () async {
       Casa apartamento = ApartamentoBuilder().casa;
