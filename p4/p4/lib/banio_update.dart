@@ -23,7 +23,6 @@ class BanioUpdate extends StatefulWidget {
 }
 
 class _BanioUpdateState extends State<BanioUpdate> {
-
   @override
   void initState() {
     super.initState();
@@ -31,13 +30,11 @@ class _BanioUpdateState extends State<BanioUpdate> {
     String banio = widget.casa.banio.toString();
     List<String> partes = banio.split(" ");
 
-
     for (var i = 0; i < partes.length; i++) {
       if (partes[i] == "jacuzzi") {
         _seleccion_decoradores["Jacuzzi"] = true;
       } else if (partes[i] == "bidet") {
         _seleccion_decoradores["Bidet"] = true;
-
       }
     }
   }
@@ -125,27 +122,29 @@ class _BanioUpdateState extends State<BanioUpdate> {
                 ),
                 onPressed: () {
                   Banio banio = BanioEstandar();
-                  if(_seleccion_decoradores["Bidet"] == true && _seleccion_decoradores["Jacuzzi"] == true){
+                  if (_seleccion_decoradores["Bidet"] == true &&
+                      _seleccion_decoradores["Jacuzzi"] == true) {
                     BanioConBidet bidet = BanioConBidet(banio);
                     BanioConJacuzzi jacuzzi = BanioConJacuzzi(bidet);
                     widget.casa.banio = jacuzzi;
-                  }else if(_seleccion_decoradores["Bidet"] == true){
+                  } else if (_seleccion_decoradores["Bidet"] == true) {
                     BanioConBidet bidet = BanioConBidet(banio);
                     widget.casa.banio = bidet;
-                  }else if(_seleccion_decoradores["Jacuzzi"] == true){
+                  } else if (_seleccion_decoradores["Jacuzzi"] == true) {
                     BanioConJacuzzi jacuzzi = BanioConJacuzzi(banio);
                     widget.casa.banio = jacuzzi;
-                  }else{
+                  } else {
                     widget.casa.banio = banio;
                   }
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          CocinaUpdate(casa: widget.casa),
+                      builder: (context) => CocinaUpdate(casa: widget.casa),
                     ),
-                  );
+                  ).then((value) {
+                    Navigator.pop(context);
+                  });
                 },
                 child: const Text(
                   "Continuar",

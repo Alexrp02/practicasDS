@@ -38,14 +38,13 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
     // Configurar el estado inicial basado en las características de la casa
     String cocina = widget.casa.cocina.toString();
     List<String> partes = cocina.split(" ");
-    print(cocina+"\n");
+    print(cocina + "\n");
 
     for (var i = 0; i < partes.length; i++) {
       if (partes[i] == "isla") {
         _seleccion_decoradores["Isla"] = true;
       } else if (partes[i] == "lavavajillas") {
         _seleccion_decoradores["Lavavajillas"] = true;
-
       }
     }
   }
@@ -72,7 +71,7 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
                   ),
                   Text("¿Quieres modificar algo a la cocina?",
                       style:
-                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -88,7 +87,7 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
                       decoration: BoxDecoration(
                           border: _seleccion_decoradores["Isla"]!
                               ? Border.all(
-                              width: 2, color: const Color(0xfff3b46a))
+                                  width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
@@ -101,7 +100,7 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
                       decoration: BoxDecoration(
                           border: _seleccion_decoradores["Lavavajillas"]!
                               ? Border.all(
-                              width: 2, color: const Color(0xfff3b46a))
+                                  width: 2, color: const Color(0xfff3b46a))
                               : Border.all(color: Colors.transparent),
                           borderRadius: BorderRadius.circular(16)),
                       child: CustomButton(
@@ -128,23 +127,24 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
                 ),
                 onPressed: () {
                   Cocina cocina = CocinaEstandar();
-                  if(_seleccion_decoradores["Lavavajillas"] == true && _seleccion_decoradores["Isla"] == true){
-                    CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
+                  if (_seleccion_decoradores["Lavavajillas"] == true &&
+                      _seleccion_decoradores["Isla"] == true) {
+                    CocinaConLavavajillas lavavajillas =
+                        CocinaConLavavajillas(cocina);
                     CocinaConIsla isla = CocinaConIsla(lavavajillas);
                     widget.casa.cocina = isla;
-                  }else if(_seleccion_decoradores["Isla"] == true){
+                  } else if (_seleccion_decoradores["Isla"] == true) {
                     CocinaConIsla isla = CocinaConIsla(cocina);
                     widget.casa.cocina = isla;
-                  }else if(_seleccion_decoradores["Lavavajillas"] == true){
-                    CocinaConLavavajillas lavavajillas = CocinaConLavavajillas(cocina);
+                  } else if (_seleccion_decoradores["Lavavajillas"] == true) {
+                    CocinaConLavavajillas lavavajillas =
+                        CocinaConLavavajillas(cocina);
                     widget.casa.cocina = lavavajillas;
-                  }else{
+                  } else {
                     widget.casa.cocina = cocina;
                   }
 
-
                   globals.gestorCasas.updateCasa(widget.casa);
-
 
                   Navigator.push(
                     context,
@@ -153,7 +153,9 @@ class _CocinaUpdateState extends State<CocinaUpdate> {
                         casa: widget.casa,
                       ),
                     ),
-                  );
+                  ).then((value) {
+                    Navigator.pop(context);
+                  });
                 },
                 child: const Text(
                   "Continuar",

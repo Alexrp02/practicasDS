@@ -37,12 +37,10 @@ class _ListaCasasState extends State<ListaCasas> {
   }
 
   void _borrarCasa(Casa c) {
-    setState(() {
-      globals.gestorCasas.eliminar(c);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const ListaCasas()));
+    globals.gestorCasas.eliminar(c).then((value) {
+      setState(() {
+        globals.gestorCasas.casas = globals.gestorCasas.casas;
+      });
     });
   }
 
@@ -55,7 +53,11 @@ class _ListaCasasState extends State<ListaCasas> {
           casa: c,
         ),
       ),
-    );
+    ).then((value) {
+      setState(() {
+        globals.gestorCasas.casas = globals.gestorCasas.casas;
+      });
+    });
   }
 
   @override
@@ -113,11 +115,13 @@ class _ListaCasasState extends State<ListaCasas> {
                         children: [
                           IconButton(
                             icon: Icon(Icons.edit),
-                            onPressed: () => _editarCasa(globals.gestorCasas.casas[index]),
+                            onPressed: () =>
+                                _editarCasa(globals.gestorCasas.casas[index]),
                           ),
                           IconButton(
                             icon: Icon(Icons.delete),
-                            onPressed: () => _borrarCasa(globals.gestorCasas.casas[index]),
+                            onPressed: () =>
+                                _borrarCasa(globals.gestorCasas.casas[index]),
                           ),
                         ],
                       ),

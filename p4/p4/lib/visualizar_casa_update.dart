@@ -194,10 +194,7 @@ class _VisualizarCasaUpdateState extends State<VisualizarCasaUpdate> {
                         side: const BorderSide(color: Colors.black, width: 3),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ListaCasas()));
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         "Volver",
